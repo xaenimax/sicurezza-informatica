@@ -18,6 +18,7 @@ namespace First_Application
 			InitializeComponent();
 			button2.Hide();
 			button3.Hide();
+			//label1.Text = "" + (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
 		}
 
 		//private void label1_ParentChanged(object sender, EventArgs e)
@@ -30,7 +31,7 @@ namespace First_Application
 			Form2 secondaSchermata = new Form2(this);
 			secondaSchermata.Show();
 		}
-
+		
 		private void menuItem1_click(object sender, EventArgs e)
 		{
 			Close();
@@ -38,7 +39,7 @@ namespace First_Application
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			openFileDialog1.InitialDirectory = @"\Temp";
+			openFileDialog1.InitialDirectory = @"\Windows";
 			openFileDialog1.ShowDialog();
 			label2.Text = "Hai selezionato il file:\n " + openFileDialog1.FileName;
 		}
@@ -60,8 +61,7 @@ namespace First_Application
 			//calcolo il numero di byte che ci saranno per parte
 
             int numeroDiBytePerFile = (int)(fileDaDividere.Length / Parametri.n_split);
-            long resto =  fileDaDividere.Length % Parametri.n_split ;
-            
+            long resto =  fileDaDividere.Length % Parametri.n_split ;            
 
             FileStream[] fsFileSplittato = new FileStream[Parametri.n_split];
             FileInfo[] fileSplittato = new FileInfo[Parametri.n_split];
