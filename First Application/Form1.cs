@@ -38,7 +38,7 @@ namespace First_Application
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			openFileDialog1.InitialDirectory = @"\";
+			openFileDialog1.InitialDirectory = @"\Temp";
 			openFileDialog1.ShowDialog();
 			label2.Text = "Hai selezionato il file:\n " + openFileDialog1.FileName;
 		}
@@ -51,27 +51,36 @@ namespace First_Application
 		private void button2_click(object sender, EventArgs e)
 		{
 			FileInfo nota = new FileInfo(openFileDialog1.FileName);
-			dividiFile(2, nota);
+			dividiFile(nota);
 		}
 
-		private void dividiFile(int numeroDiParti, FileInfo fileDaDividere) {
+		private void dividiFile(FileInfo fileDaDividere) {
 
 			FileStream fsDaDividere = fileDaDividere.Open(FileMode.Open, FileAccess.Read);
 			//calcolo il numero di byte che ci saranno per parte
 
-			int numeroDiBytePerFile = (int)(fileDaDividere.Length / numeroDiParti);
+            int numeroDiBytePerFile = (int)(fileDaDividere.Length / Parametri.n_split);
+            long resto =  fileDaDividere.Length % Parametri.n_split ;
+            
 
-			for (int i = 1; i <= numeroDiParti; i++)
+            FileStream[] fsFileSplittato = new FileStream[Parametri.n_split];
+            FileInfo[] fileSplittato = new FileInfo[Parametri.n_split];
+
+            for (int i = 0; i < Parametri.n_split; i++)
+            {
+                fileSplittato[i] = new FileInfo(@"My Documents\splitto" + i);
+                fsFileSplittato[i] = fileSplittato[i].Create();
+            }
+
+            while (fsDaDividere.Position < fileDaDividere.Length)
+            {
+                long temp = fsDaDividere.Position % Parametri.n_split;
+                fsFileSplittato[temp].WriteByte((byte)fsDaDividere.ReadByte());
+            }
+
+			for (int i = 0; i < Parametri.n_split ; i++)
 			{
-				FileInfo fileSplittato = new FileInfo(@"My Documents\splitto" + i);
-				FileStream fsFileSplittato = fileSplittato.Create();
-
-				while (fsDaDividere.Position < (numeroDiBytePerFile*i))
-				{
-					fsFileSplittato.WriteByte((byte)fsDaDividere.ReadByte());
-				}
-
-				fsFileSplittato.Close();
+                fsFileSplittato[i].Close();
 			}
 
 			MessageBox.Show("File suddiviso!" /*+ fsDaDividere.Position + " " + fsDaDividere.Length*/, "Success!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
@@ -80,27 +89,39 @@ namespace First_Application
 			fsDaDividere.Close();
 		}
 
-		private void riunisciFile(int numeroDiParti, String SuffissoFileDaRiunire, String nomeDelFileUnito)
+		private void riunisciFile(String SuffissoFileDaRiunire, String nomeDelFileUnito)
 		{
 
+            long numByte = 0;
 			FileInfo fileUnito = new FileInfo(@"My Documents\" + nomeDelFileUnito);
 			FileStream fsFileUnito = fileUnito.Create();
 			//int numeroDiBytePerFile = (int)(fileDaDividere.Length / numeroDiParti);
 
-			for (int i = 0; i < numeroDiParti; i++)
+            FileInfo[] fileDaRiunire = new FileInfo[Parametri.n_split];
+
+            FileStream[] fsFileDaRiunire = new FileStream[Parametri.n_split];
+
+            for (int i = 0; i < Parametri.n_split; i++)
+            {
+                fileDaRiunire[i] = new FileInfo(@"My Documents\splitto" +i );
+                fsFileDaRiunire[i] = fileDaRiunire[i].Open(FileMode.Open, FileAccess.Read);
+            }
+
+            for (int i = 0; i < Parametri.n_split; i++)
+            {
+                numByte = numByte + fsFileDaRiunire[i].Length;
+            }
+
+
+            for (int i = 0; i < numByte ; i++)
+            {
+                long temp = i % Parametri.n_split;
+                fsFileUnito.WriteByte((byte)fsFileDaRiunire[temp].ReadByte());
+            }
+
+			for (int i = 0; i < Parametri.n_split; i++)
 			{
-				int lettoreDiByte = 0;
-				FileInfo fileDaRiunire = new FileInfo(@"My Documents\splitto" + (i+1));
-
-				FileStream fsFileDaRiunire = fileDaRiunire.Open(FileMode.Open, FileAccess.Read);
-
-				while (lettoreDiByte < fsFileDaRiunire.Length)
-				{
-					fsFileUnito.WriteByte((byte)fsFileDaRiunire.ReadByte());
-					lettoreDiByte++;
-				}
-
-				fsFileDaRiunire.Close();
+				fsFileDaRiunire[i].Close();
 			}
 
 			fsFileUnito.Close();
@@ -109,8 +130,13 @@ namespace First_Application
 
 		private void button3_click(object sender, EventArgs e)
 		{
-			riunisciFile(2, "splitto", "fileUnito.pwi");
+			riunisciFile("splitto", "fileUnito.pwi");
 		}
+
+        private void label2_ParentChanged(object sender, EventArgs e)
+        {
+
+        }
 
 	}
 }
