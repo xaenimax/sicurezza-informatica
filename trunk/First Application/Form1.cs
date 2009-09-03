@@ -13,6 +13,10 @@ namespace First_Application
 {
 	public partial class Form1 : Form
 	{
+
+        private string nomeFileCompletoSelezionato;
+        private string estensioneFileSelezionato;
+
 		public Form1()
 		{
 			InitializeComponent();
@@ -39,9 +43,9 @@ namespace First_Application
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			openFileDialog1.InitialDirectory = @"\Windows";
+			openFileDialog1.InitialDirectory = @"\My Documents\";
 			openFileDialog1.ShowDialog();
-			label2.Text = "Hai selezionato il file:\n " + openFileDialog1.FileName;
+			nomeFileCompletoSelezionato = openFileDialog1.FileName;
 		}
 
 		private void showButton2(object sender, EventArgs e)
