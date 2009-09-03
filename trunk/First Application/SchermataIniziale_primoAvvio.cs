@@ -35,15 +35,16 @@ namespace First_Application
 				MessageBox.Show("Le password corrispondono!"); //TODO controllare anche la creazione del file conf
                 passwordUtente = password_textbox.Text;
 
-                Parametri.Psw1 = passwordUtente; //TODO generazione STS random;
+                Parametri.Psw1 = passwordUtente;
+
+                FileSystem filesystem = new FileSystem();
+
+                //TODO generazione STS random;
 
                 //String s = Encrypt(password_textbox.Text);
                 //MessageBox.Show(s);
                 //s = Decrypt(s);
-                //MessageBox.Show(s);
-
-                Form1 primaSchermata = new Form1();  // messa a cazzo per la continuazione
-                primaSchermata.Show(); 
+                //MessageBox.Show(s); 
 
 			}
 			else
