@@ -13,10 +13,15 @@ namespace First_Application
 {
 	public partial class SchermataIniziale_primoAvvio : Form
 	{
+
+        private string passwordUtente;
+
 		public SchermataIniziale_primoAvvio()
 		{
 			InitializeComponent();
 		}
+
+
 
 		private void quit_menuItemAction(object sender, EventArgs e)
 		{
@@ -28,10 +33,18 @@ namespace First_Application
 			if (controllaPassword())
 			{
 				MessageBox.Show("Le password corrispondono!"); //TODO controllare anche la creazione del file conf
-				//String s = Encrypt(password_textbox.Text);
-				//MessageBox.Show(s);
-				//s = Decrypt(s);
-				//MessageBox.Show(s);
+                passwordUtente = password_textbox.Text;
+
+                Parametri.Psw1 = passwordUtente; //TODO generazione STS random;
+
+                //String s = Encrypt(password_textbox.Text);
+                //MessageBox.Show(s);
+                //s = Decrypt(s);
+                //MessageBox.Show(s);
+
+                Form1 primaSchermata = new Form1();  // messa a cazzo per la continuazione
+                primaSchermata.Show(); 
+
 			}
 			else
 			{

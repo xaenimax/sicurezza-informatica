@@ -20,7 +20,7 @@ namespace First_Application
         {
             Parametri param = new Parametri();
             Init.initStart();
-            Application.Run(new Form1());
+            
         }
     }
 }

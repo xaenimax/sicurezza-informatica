@@ -13,11 +13,9 @@ namespace First_Application
         {
             if (Directory.Exists(Parametri.cartella))
             {
-                MessageBox.Show("false");
                 return false;
                 
             }
-            MessageBox.Show("true");
             return true;
         }
 
@@ -32,12 +30,12 @@ namespace First_Application
             f1.Attributes |= FileAttributes.Hidden;
 
             FileInfo f2 = new FileInfo(Parametri.fileList);
-            f1.Create();
-            f1.Attributes |= FileAttributes.Hidden;
+            f2.Create();
+            f2.Attributes |= FileAttributes.Hidden;
 
             FileInfo f3 = new FileInfo(Parametri.fileIV);
-            f1.Create();
-            f1.Attributes |= FileAttributes.Hidden;
+            f3.Create();
+            f3.Attributes |= FileAttributes.Hidden;
 
             fill_fileconf();
         }
@@ -45,10 +43,12 @@ namespace First_Application
 
         public static void fill_fileconf() //genera il file conf
         {
+            Application.Run(new SchermataIniziale_primoAvvio());
         }
 
-        public static void normal_start() // avvio normale dell'applicazione ( avvio diverso dal primo)
+        public static void normalStart() // avvio normale dell'applicazione ( avvio diverso dal primo)
         {
+            //Application.Run( new SchermataIniziale());
 
         }
 
