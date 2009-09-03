@@ -1,4 +1,4 @@
-﻿namespace First_Application
+﻿namespace SottoCoperta
 {
 	partial class SchermataIniziale_primoAvvio
 	{

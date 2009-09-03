@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 
-namespace First_Application
+namespace SottoCoperta
 {
     class Init
     {

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace First_Application
+namespace SottoCoperta
 {
 	public partial class SchermataIniziale_primoAvvio : Form
 	{

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace First_Application
+namespace SottoCoperta
 {
 
     
@@ -18,6 +18,7 @@ namespace First_Application
         [MTAThread]
         static void Main()
         {
+						//Console.Write(
             Parametri param = new Parametri();
             Init.initStart();
             
