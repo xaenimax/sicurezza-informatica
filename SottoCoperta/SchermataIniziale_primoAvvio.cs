@@ -74,7 +74,7 @@ namespace SottoCoperta
 
         FileSystem filesystem = new FileSystem();
 
-
+        Program.cambiaFormDalPrimo(this, new MenuPrincipale());
       }
 			else
 			{
