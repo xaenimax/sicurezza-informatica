@@ -87,10 +87,9 @@ namespace SottoCoperta
         fc.WriteByte(out_byte);
 
       }
-
-      fs.Close;
-      fc.Close;
-
+      fs.Close();
+      fc.Close();
+      File.Delete(percorso);
     }
 
   }

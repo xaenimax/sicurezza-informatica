@@ -33,7 +33,7 @@ namespace SottoCoperta
 		{
       if (controllaPassword())
       {
-        MessageBox.Show("Le password corrispondono!"); //TODO controllare anche la creazione del file conf
+        
         passwordUtente = password_textbox.Text;
 
         Parametri.Psw1 = passwordUtente;
@@ -41,24 +41,24 @@ namespace SottoCoperta
         FileStream fs = new FileStream(Parametri.fileconf, FileMode.Open);
         BinaryWriter bw = new BinaryWriter(fs);
 
-        creaArrayRandom(ref Parametri.sts_11);
-        creaArrayRandom(ref Parametri.sts_12);
+        GeneratoreDiRandom.creaArrayRandom(ref Parametri.sts_11);
+        GeneratoreDiRandom.creaArrayRandom(ref Parametri.sts_12);
 
         for (int i = 0; i < Parametri.sts_11.Length; i++)
         {
-          bw.Write(sts_11[i]);
+          bw.Write(Parametri.sts_11[i]);
         }
 
         for (int i = 0; i < Parametri.sts_12.Length; i++)
         {
-          bw.Write(sts_12[i]);
+          bw.Write(Parametri.sts_12[i]);
         }
 
         byte[] frase = new byte[16];
         byte[] md5_frase = new byte[16];
 
 
-
+        fs.Close();
 
         FileSystem filesystem = new FileSystem();
 
