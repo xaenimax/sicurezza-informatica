@@ -75,6 +75,7 @@ namespace SottoCoperta
 			return hashInByte;
 		}
 
+		//genera una stringa random di grandezza numeroCaratteriDellaStringa
 		public static string generaStringaRandom(int numeroCaratteriDellaStringa)
 		{
 			char[] stringaRandom = new char[numeroCaratteriDellaStringa];
@@ -90,6 +91,15 @@ namespace SottoCoperta
 			String stringa = new String(stringaRandom);
 
 			return stringa;
+		}
+
+		//genera un array di byte random di grandezza numeroByteRandomDaGenerare
+		public byte[] generaByteRandom(int numeroByteRandomDaGenerare) {
+			byte[] byteRandom = new byte[numeroByteRandomDaGenerare];
+			Random generatoreRandom = new Random();
+			generatoreRandom.NextBytes(byteRandom);
+
+			return byteRandom;
 		}
 
 	}
