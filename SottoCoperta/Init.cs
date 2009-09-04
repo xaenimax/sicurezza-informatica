@@ -21,21 +21,31 @@ namespace SottoCoperta
 
 		public static void createConf() // crea directory e file di configurazione
 		{
+
+      FileStream fs;
+
 			DirectoryInfo dirInfo = new DirectoryInfo(Parametri.cartella);
 			dirInfo.Create();
 			dirInfo.Attributes |= FileAttributes.Hidden;
 
+      DirectoryInfo dirInfoSystem = new DirectoryInfo(Parametri.cartella_filesystem);
+      dirInfo.Create();
+      dirInfo.Attributes |= FileAttributes.Hidden;
+
 			FileInfo f1 = new FileInfo(Parametri.fileconf);
-			f1.Create();
+			fs = f1.Create();
 			f1.Attributes |= FileAttributes.Hidden;
+      fs.Close();
 
 			FileInfo f2 = new FileInfo(Parametri.fileList);
-			f2.Create();
+			fs = f2.Create();
 			f2.Attributes |= FileAttributes.Hidden;
+      fs.Close();
 
 			FileInfo f3 = new FileInfo(Parametri.fileIV);
-			f3.Create();
+			fs = f3.Create();
 			f3.Attributes |= FileAttributes.Hidden;
+      fs.Close();
       
 			Application.Run(new SchermataIniziale_primoAvvio());
 		}

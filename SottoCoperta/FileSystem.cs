@@ -11,9 +11,10 @@ namespace SottoCoperta
   class FileSystem
   {
 
-    private void dividiFile(FileInfo fileDaDividere)
+    private void dividiFile(string percorso , bool cancel)
     {
 
+      FileInfo fileDaDividere = new FileInfo(percorso);
       FileStream fsDaDividere = fileDaDividere.Open(FileMode.Open, FileAccess.Read);
       //calcolo il numero di byte che ci saranno per parte
 
@@ -47,6 +48,9 @@ namespace SottoCoperta
       MessageBox.Show("File suddiviso!" /*+ fsDaDividere.Position + " " + fsDaDividere.Length*/, "Success!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
 
       fsDaDividere.Close();
+
+      if (cancel)
+        File.Delete(percorso);
     }
 
     private void riunisciFile(String SuffissoFileDaRiunire, String nomeDelFileUnito)

@@ -11,6 +11,7 @@ namespace SottoCoperta
         public static int[] sts_11; // permutazione all'interno di un byte
         public static int[] sts_12; // permutazione dei sottofile
         public static string cartella; // cartella con i file di setting
+        public static string cartella_filesystem; // cartella con i file di setting
         public static string fileconf; // file di configurazione
         public static string fileList; // lista di file del file system nascosto
         public static string fileIV; // lista di IV per l'opzione cassaforte
@@ -21,6 +22,7 @@ namespace SottoCoperta
         {
             n_split = 7;
             cartella = @"Windows\System\set0956213";
+            cartella_filesystem = @"Windows\System\set0956213\fs";
             fileconf = @"Windows\System\set0956213\dsf341.007";
             fileList = @"Windows\System\set0956213\frt453.007" ;
             fileIV = @"Windows\System\set0956213\wtrb.007";

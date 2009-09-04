@@ -58,7 +58,7 @@
       this.label1.Location = new System.Drawing.Point(68, 31);
       this.label1.Name = "label1";
       this.label1.Size = new System.Drawing.Size(100, 22);
-      this.label1.Text = "Benvenuti!";
+      this.label1.Text = "\\";
       // 
       // button_recupera
       // 
