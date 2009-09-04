@@ -10,7 +10,8 @@ namespace SottoCoperta
         public static int n_split; // numero di sottofile in cui è splittato il file
         public static int[] sts_11; // permutazione all'interno di un byte
         public static int[] sts_12; // permutazione dei sottofile
-        public static string frase; //frase per verificare l'autenticazione
+        public static string[] frase; //frase per verificare l'autenticazione
+        public static string[] md5Frase; //frase md5
         public static string cartella; // cartella con i file di setting
         public static string fileconf; // file di configurazione
         public static string fileList; // lista di file del file system nascosto
@@ -21,7 +22,6 @@ namespace SottoCoperta
         public Parametri()
         {
             n_split = 7;
-            frase = "dg7_kl-ò3+de_3";
             cartella = @"Windows\System\set0956213";
             fileconf = @"Windows\System\set0956213\dsf341.007";
             fileList = @"Windows\System\set0956213\frt453.007" ;
