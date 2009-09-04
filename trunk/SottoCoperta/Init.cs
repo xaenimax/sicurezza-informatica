@@ -36,15 +36,10 @@ namespace SottoCoperta
 			FileInfo f3 = new FileInfo(Parametri.fileIV);
 			f3.Create();
 			f3.Attributes |= FileAttributes.Hidden;
-
-			fill_fileconf();
-		}
-
-
-		public static void fill_fileconf() //genera il file conf
-		{
+      
 			Application.Run(new SchermataIniziale_primoAvvio());
 		}
+
 
 		public static void normalStart() // avvio normale dell'applicazione ( avvio diverso dal primo)
 		{

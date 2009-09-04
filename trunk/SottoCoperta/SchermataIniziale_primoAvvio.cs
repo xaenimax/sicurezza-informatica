@@ -37,6 +37,9 @@ namespace SottoCoperta
 
                 Parametri.Psw1 = passwordUtente;
 
+                FileStream fs = new FileStream(Parametri.fileconf , FileMode.Open, FileAccess.Write );
+                
+
                 FileSystem filesystem = new FileSystem();
 
                 //TODO generazione STS random;
