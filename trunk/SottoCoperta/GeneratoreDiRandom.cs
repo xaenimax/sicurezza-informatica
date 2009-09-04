@@ -84,7 +84,7 @@ namespace SottoCoperta
 
 			for (int i = 0; i < numeroCaratteriDellaStringa; i++)
 			{
-				numeroRandom = generatoreRandom.Next(0, 255); //secondo ascii sono le lettere da A a z (comprese maiuscole e minuscole)
+				numeroRandom = generatoreRandom.Next(0, 255); 
 				stringaRandom[i] = Convert.ToChar(numeroRandom);
 			}
 
@@ -93,8 +93,25 @@ namespace SottoCoperta
 			return stringa;
 		}
 
+    public static string nomeFileRandom(int numeroCaratteriDellaStringa)
+    {
+      char[] stringaRandom = new char[numeroCaratteriDellaStringa];
+      int numeroRandom;
+      Random generatoreRandom = new Random();
+
+      for (int i = 0; i < numeroCaratteriDellaStringa; i++)
+      {
+        numeroRandom = generatoreRandom.Next(97, 122);
+        stringaRandom[i] = Convert.ToChar(numeroRandom);
+      }
+
+      String stringa = new String(stringaRandom);
+
+      return stringa;
+    }
+
 		//genera un array di byte random di grandezza numeroByteRandomDaGenerare
-		public byte[] generaByteRandom(int numeroByteRandomDaGenerare) {
+		public static byte[] generaByteRandom(int numeroByteRandomDaGenerare) {
 			byte[] byteRandom = new byte[numeroByteRandomDaGenerare];
 			Random generatoreRandom = new Random();
 			generatoreRandom.NextBytes(byteRandom);

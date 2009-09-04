@@ -11,10 +11,11 @@ namespace SottoCoperta
   class FileSystem
   {
 
-    private void dividiFile(string percorso , bool cancel)
+    private void inserisciFile(string percorso , bool cancel , bool crypt)
     {
 
       FileInfo fileDaDividere = new FileInfo(percorso);
+      string nomeFile = fileDaDividere.Name;
       FileStream fsDaDividere = fileDaDividere.Open(FileMode.Open, FileAccess.Read);
       //calcolo il numero di byte che ci saranno per parte
 
@@ -24,9 +25,25 @@ namespace SottoCoperta
       FileStream[] fsFileSplittato = new FileStream[Parametri.n_split];
       FileInfo[] fileSplittato = new FileInfo[Parametri.n_split];
 
+      string nuovoNomeFile = null ;
+      bool b = true;
+
+      while (b)
+      {
+        nuovoNomeFile = GeneratoreDiRandom.nomeFileRandom(12);
+        
+        if (File.Exists(Parametri.cartella_filesystem + '\\' + nuovoNomeFile + "0.007"))
+        {
+          b = true ;
+        }
+
+        b = false;
+
+      }
+
       for (int i = 0; i < Parametri.n_split; i++)
       {
-        fileSplittato[i] = new FileInfo(@"My Documents\splitto" + i);
+        fileSplittato[i] = new FileInfo(Parametri.cartella_filesystem + '\\' + nuovoNomeFile + i + ".007");
         fsFileSplittato[i] = fileSplittato[i].Create();
       }
 
@@ -45,6 +62,8 @@ namespace SottoCoperta
         fsFileSplittato[i].Close();
       }
 
+      //inserisciListaFile( nomeFile , nuovoNomeFile , crypt) ;
+
       MessageBox.Show("File suddiviso!" /*+ fsDaDividere.Position + " " + fsDaDividere.Length*/, "Success!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
 
       fsDaDividere.Close();
@@ -53,13 +72,21 @@ namespace SottoCoperta
         File.Delete(percorso);
     }
 
-    private void riunisciFile(String SuffissoFileDaRiunire, String nomeDelFileUnito)
+    private void estraiFile(String percorsoFileUnito , bool cancel)
     {
 
       long numByte = 0;
-      FileInfo fileUnito = new FileInfo(@"My Documents\" + nomeDelFileUnito);
+      string nomeFileUnito = null;
+      string nomeFileDiviso = null;
+      bool crypt = false ;
+      
+
+      FileInfo fileUnito = new FileInfo(percorsoFileUnito);
       FileStream fsFileUnito = fileUnito.Create();
-      //int numeroDiBytePerFile = (int)(fileDaDividere.Length / numeroDiParti);
+
+      nomeFileUnito = fileUnito.Name;
+
+      // nomeFileDiviso = trovaFile( nomeFileUnito , ref crypt);
 
       FileInfo[] fileDaRiunire = new FileInfo[Parametri.n_split];
 
@@ -67,7 +94,7 @@ namespace SottoCoperta
 
       for (int i = 0; i < Parametri.n_split; i++)
       {
-        fileDaRiunire[i] = new FileInfo(@"My Documents\splitto" + i);
+        fileDaRiunire[i] = new FileInfo(Parametri.cartella_filesystem + '\\'+ nomeFileDiviso + i + ".007" );
         fsFileDaRiunire[i] = fileDaRiunire[i].Open(FileMode.Open, FileAccess.Read);
       }
 
@@ -93,6 +120,15 @@ namespace SottoCoperta
       }
 
       fsFileUnito.Close();
+
+      if (cancel)
+      {
+        for( int i = 0 ; i < Parametri.n_split ; i++)
+        {
+          File.Delete(Parametri.cartella_filesystem + '\\' + nomeFileDiviso + i + ".007");
+        }
+      }
+
       MessageBox.Show("File ricostruito!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
     }
 
