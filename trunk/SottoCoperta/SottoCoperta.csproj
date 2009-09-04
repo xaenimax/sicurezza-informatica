@@ -59,12 +59,26 @@
     <Compile Include="FileSystem.cs" />
     <Compile Include="GeneratoreDiRandom.cs" />
     <Compile Include="Init.cs" />
+    <Compile Include="MenuPrincipale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuPrincipale.Designer.cs">
+      <DependentUpon>MenuPrincipale.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parametri.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MenuPrincipale.resx">
+      <DependentUpon>MenuPrincipale.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SchermataIniziale.resx">
+      <DependentUpon>SchermataIniziale.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SchermataIniziale_primoAvvio.resx">
@@ -74,6 +88,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SchermataIniziale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SchermataIniziale.Designer.cs">
+      <DependentUpon>SchermataIniziale.cs</DependentUpon>
     </Compile>
     <Compile Include="SchermataIniziale_primoAvvio.cs">
       <SubType>Form</SubType>

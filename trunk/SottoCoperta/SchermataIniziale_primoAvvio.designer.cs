@@ -30,20 +30,30 @@
 		private void InitializeComponent()
 		{
 			this.mainMenu1 = new System.Windows.Forms.MainMenu();
+			this.avanti_menuItem = new System.Windows.Forms.MenuItem();
+			this.quit_menuItem = new System.Windows.Forms.MenuItem();
 			this.benvenuti = new System.Windows.Forms.Label();
 			this.descrizione_benvenuti = new System.Windows.Forms.Label();
 			this.password = new System.Windows.Forms.Label();
 			this.password_textbox = new System.Windows.Forms.TextBox();
 			this.ripeti_pwd = new System.Windows.Forms.Label();
 			this.ripeti_pwd_textbox = new System.Windows.Forms.TextBox();
-			this.avanti_menuItem = new System.Windows.Forms.MenuItem();
-			this.quit_menuItem = new System.Windows.Forms.MenuItem();
 			this.SuspendLayout();
 			// 
 			// mainMenu1
 			// 
 			this.mainMenu1.MenuItems.Add(this.avanti_menuItem);
 			this.mainMenu1.MenuItems.Add(this.quit_menuItem);
+			// 
+			// avanti_menuItem
+			// 
+			this.avanti_menuItem.Text = "Avanti";
+			this.avanti_menuItem.Click += new System.EventHandler(this.avanti_menuItemAction);
+			// 
+			// quit_menuItem
+			// 
+			this.quit_menuItem.Text = "Esci";
+			this.quit_menuItem.Click += new System.EventHandler(this.quit_menuItemAction);
 			// 
 			// benvenuti
 			// 
@@ -93,16 +103,6 @@
 			this.ripeti_pwd_textbox.Size = new System.Drawing.Size(118, 21);
 			this.ripeti_pwd_textbox.TabIndex = 8;
 			// 
-			// avanti_menuItem
-			// 
-			this.avanti_menuItem.Text = "Avanti";
-			this.avanti_menuItem.Click += new System.EventHandler(this.avanti_menuItemAction);
-			// 
-			// quit_menuItem
-			// 
-			this.quit_menuItem.Text = "Esci";
-			this.quit_menuItem.Click += new System.EventHandler(this.quit_menuItemAction);
-			// 
 			// SchermataIniziale_primoAvvio
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -117,7 +117,7 @@
 			this.Controls.Add(this.benvenuti);
 			this.Menu = this.mainMenu1;
 			this.Name = "SchermataIniziale_primoAvvio";
-			this.Text = "SchermataIniziale_primoAvvio";
+			this.Text = "SottoCoperta";
 			this.ResumeLayout(false);
 
 		}
