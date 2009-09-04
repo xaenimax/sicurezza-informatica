@@ -61,18 +61,19 @@
 			// 
 			// label_seleziona
 			// 
-			this.label_seleziona.Location = new System.Drawing.Point(26, 47);
+			this.label_seleziona.Location = new System.Drawing.Point(23, 47);
 			this.label_seleziona.Name = "label_seleziona";
-			this.label_seleziona.Size = new System.Drawing.Size(186, 31);
-			this.label_seleziona.Text = "Seleziona un file di cui si intende effettuare il backup";
+			this.label_seleziona.Size = new System.Drawing.Size(187, 31);
+			this.label_seleziona.Text = "Selezionare il file che si intende archiviare";
+			this.label_seleziona.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			// 
 			// label_titoloFormBackup
 			// 
 			this.label_titoloFormBackup.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-			this.label_titoloFormBackup.Location = new System.Drawing.Point(49, 15);
+			this.label_titoloFormBackup.Location = new System.Drawing.Point(43, 14);
 			this.label_titoloFormBackup.Name = "label_titoloFormBackup";
-			this.label_titoloFormBackup.Size = new System.Drawing.Size(149, 20);
-			this.label_titoloFormBackup.Text = "Backup di un file";
+			this.label_titoloFormBackup.Size = new System.Drawing.Size(157, 20);
+			this.label_titoloFormBackup.Text = "Archivia di un file";
 			// 
 			// button_selezionaFile
 			// 
