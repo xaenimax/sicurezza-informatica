@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileSystem.cs" />
+    <Compile Include="GeneratoreDiRandom.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="Parametri.cs" />
     <Compile Include="Program.cs" />
