@@ -8,13 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using System.IO;
+using System.Threading;
 
 namespace SottoCoperta
 {
 	public partial class SchermataIniziale_primoAvvio : Form
 	{
 
-        private string passwordUtente;
+    private string passwordUtente;
 
 		public SchermataIniziale_primoAvvio()
 		{
@@ -25,7 +26,7 @@ namespace SottoCoperta
 
 		private void quit_menuItemAction(object sender, EventArgs e)
 		{
-			Close();
+			Close(); //non passo dalla classe Program in quanto essendo il primo form chiudo direttamente questo
 		}
 
 		private void avanti_menuItemAction(object sender, EventArgs e)
@@ -61,7 +62,9 @@ namespace SottoCoperta
 
 		private bool controllaPassword() {
 			if (password_textbox.Text != ripeti_pwd_textbox.Text)
+			{
 				return false;
+			}
 			else
 				return true;
 		}

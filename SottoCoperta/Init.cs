@@ -43,8 +43,7 @@ namespace SottoCoperta
 
 		public static void normalStart() // avvio normale dell'applicazione ( avvio diverso dal primo)
 		{
-			//Application.Run( new SchermataIniziale());
-
+			Application.Run( new SchermataIniziale());
 		}
 
 		public static void initStart() // funzione principale
