@@ -55,10 +55,22 @@ namespace SottoCoperta
         }
 
         byte[] frase = new byte[16];
+        frase = GeneratoreDiRandom.generaByteRandom(frase.Length);
         byte[] md5_frase = new byte[16];
+        md5_frase = GeneratoreDiRandom.calcolaMd5(frase);
 
+        for (int i = 0; i < frase.Length ; i++)
+        {
+          bw.Write(frase[i]);
+        }
+
+        for (int i = 0; i < md5_frase.Length; i++)
+        {
+          bw.Write(md5_frase[i]);
+        }
 
         fs.Close();
+        // manca la crittografia del file
 
         FileSystem filesystem = new FileSystem();
 
