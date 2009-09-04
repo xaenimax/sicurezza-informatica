@@ -30,5 +30,10 @@ namespace SottoCoperta
 		{
 
 		}
+
+		private void button_backup_action(object sender, EventArgs e)
+		{
+			Program.cambiaForm(this, new BackupFileForm());
+		}
 	}
 }
