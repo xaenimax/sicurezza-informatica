@@ -91,7 +91,11 @@ namespace SottoCoperta
       }
 			else
 			{
-				MessageBox.Show("Attenzione, le password inserite non corrispondono");
+				if(password_textbox.Text.Length >= 8)
+					MessageBox.Show("Attenzione, le password inserite non corrispondono");
+				if(password_textbox.Text.Length < 8)
+					MessageBox.Show("Attenzione, la lunghezza della password deve essere compresa tra 8 e 12 caratteri");
+
 				password_textbox.Text = "";
 				ripeti_pwd_textbox.Text = "";
 				password_textbox.Focus();
@@ -100,6 +104,10 @@ namespace SottoCoperta
 
 		private bool controllaPassword() {
 			if (password_textbox.Text != ripeti_pwd_textbox.Text)
+			{
+				return false;
+			}
+			if (password_textbox.Text.Length < 8)
 			{
 				return false;
 			}
