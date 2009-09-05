@@ -207,9 +207,9 @@ namespace SottoCoperta
   {
     BitArray newbit = new BitArray(bit.Length);
 
-    for (int i = 0; i < Parametri.sts_11.Length; i++)
+    for (int i = 0; i < Parametri.sts_1.Length; i++)
     {
-      newbit[Parametri.sts_11[i]] = bit[i];
+      newbit[Parametri.sts_1[i]] = bit[i];
     }
     bit = newbit;
   }
@@ -219,9 +219,9 @@ namespace SottoCoperta
   {
     BitArray newbit = new BitArray(bit.Length);
 
-    for (int i = 0; i < Parametri.sts_11.Length; i++)
+    for (int i = 0; i < Parametri.sts_1.Length; i++)
     {
-      newbit[i] = bit[Parametri.sts_11[i]];
+      newbit[i] = bit[Parametri.sts_1[i]];
     }
     bit = newbit;
   }
