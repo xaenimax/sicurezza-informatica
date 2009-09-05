@@ -38,6 +38,7 @@
 			this.password_textbox = new System.Windows.Forms.TextBox();
 			this.ripeti_pwd = new System.Windows.Forms.Label();
 			this.ripeti_pwd_textbox = new System.Windows.Forms.TextBox();
+			this.label_lunghezza_password = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// mainMenu1
@@ -69,18 +70,18 @@
 			this.descrizione_benvenuti.Name = "descrizione_benvenuti";
 			this.descrizione_benvenuti.Size = new System.Drawing.Size(217, 47);
 			this.descrizione_benvenuti.Text = "E\' la prima volta che usi il programma. Inserisci la password che userai per acce" +
-					"dere al programma:";
+					"dere al programma.";
 			// 
 			// password
 			// 
-			this.password.Location = new System.Drawing.Point(10, 101);
+			this.password.Location = new System.Drawing.Point(10, 152);
 			this.password.Name = "password";
 			this.password.Size = new System.Drawing.Size(73, 21);
 			this.password.Text = "Password:";
 			// 
 			// password_textbox
 			// 
-			this.password_textbox.Location = new System.Drawing.Point(98, 101);
+			this.password_textbox.Location = new System.Drawing.Point(98, 152);
 			this.password_textbox.MaxLength = 12;
 			this.password_textbox.Name = "password_textbox";
 			this.password_textbox.PasswordChar = '*';
@@ -89,19 +90,27 @@
 			// 
 			// ripeti_pwd
 			// 
-			this.ripeti_pwd.Location = new System.Drawing.Point(10, 130);
+			this.ripeti_pwd.Location = new System.Drawing.Point(10, 192);
 			this.ripeti_pwd.Name = "ripeti_pwd";
 			this.ripeti_pwd.Size = new System.Drawing.Size(70, 33);
 			this.ripeti_pwd.Text = "Ripeti la Password:";
 			// 
 			// ripeti_pwd_textbox
 			// 
-			this.ripeti_pwd_textbox.Location = new System.Drawing.Point(98, 142);
+			this.ripeti_pwd_textbox.Location = new System.Drawing.Point(98, 192);
 			this.ripeti_pwd_textbox.MaxLength = 12;
 			this.ripeti_pwd_textbox.Name = "ripeti_pwd_textbox";
 			this.ripeti_pwd_textbox.PasswordChar = '*';
 			this.ripeti_pwd_textbox.Size = new System.Drawing.Size(118, 21);
 			this.ripeti_pwd_textbox.TabIndex = 8;
+			// 
+			// label_lunghezza_password
+			// 
+			this.label_lunghezza_password.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Italic);
+			this.label_lunghezza_password.Location = new System.Drawing.Point(10, 100);
+			this.label_lunghezza_password.Name = "label_lunghezza_password";
+			this.label_lunghezza_password.Size = new System.Drawing.Size(217, 35);
+			this.label_lunghezza_password.Text = "La Password dovrà essere compresa tra 8 e 12 caratteri";
 			// 
 			// SchermataIniziale_primoAvvio
 			// 
@@ -109,6 +118,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.AutoScroll = true;
 			this.ClientSize = new System.Drawing.Size(240, 268);
+			this.Controls.Add(this.label_lunghezza_password);
 			this.Controls.Add(this.ripeti_pwd_textbox);
 			this.Controls.Add(this.ripeti_pwd);
 			this.Controls.Add(this.password_textbox);
@@ -132,5 +142,6 @@
 		private System.Windows.Forms.TextBox ripeti_pwd_textbox;
 		private System.Windows.Forms.MenuItem avanti_menuItem;
 		private System.Windows.Forms.MenuItem quit_menuItem;
+		private System.Windows.Forms.Label label_lunghezza_password;
 	}
 }
