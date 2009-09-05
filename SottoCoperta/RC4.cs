@@ -25,6 +25,25 @@ namespace SottoCoperta
 			inizializzaChiaveRC4(chiave);
     }
 
+    public RC4(string chiave)
+    {
+      s_box = new int[256];
+
+      for (int i = 0; i < s_box.Length; i++)
+      {
+        s_box[i] = 0;
+      }
+      key = new byte[keylength];
+
+      byte[] byte_chiave = new byte[chiave.Length];
+
+      ASCIIEncoding encoding = new ASCIIEncoding();
+
+      byte_chiave = encoding.GetBytes(chiave);
+
+      inizializzaChiaveRC4(byte_chiave);
+    }
+
 		//inizializza la sbox con la chiave inserita dall'utente
     public void inizializzaChiaveRC4(byte[] chiave)
     {
