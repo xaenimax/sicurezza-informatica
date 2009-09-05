@@ -23,9 +23,9 @@ namespace SottoCoperta
             n_split = 7;
             cartella = @"Windows\System\set0956213";
             cartella_filesystem = @"Windows\System\set0956213\fs";
-            fileconf = @"Windows\System\set0956213\dsf341.007";
-            fileList = @"Windows\System\set0956213\frt453.007" ;
-            fileIV = @"Windows\System\set0956213\wtrb.007";
+            fileconf = @"Windows\System\set0956213\dsf341.conf";
+            fileList = @"Windows\System\set0956213\frt453.conf" ;
+            fileIV = @"Windows\System\set0956213\wtrb.conf";
             sts_11 = new int[8];
             sts_12 = new int[n_split];
 

@@ -60,7 +60,7 @@ namespace SottoCoperta
 			//FileInfo fileCriptato = new FileInfo(fileOriginale.DirectoryName + "~" + fileOriginale.Name);
 
 			//FileStream fsFileCriptato = fileCriptato.Create();
-			FileInfo fileConTilde = creaFileConTilde(fileOriginale);
+			FileInfo fileConTilde = FileSystem.creaFileConTilde(fileOriginale);
 			FileStream fsFileConTilde = new FileStream(fileConTilde.FullName, FileMode.Open, FileAccess.Write);
 
       fileConTilde.Attributes |= FileAttributes.Hidden;
@@ -103,16 +103,6 @@ namespace SottoCoperta
 			File.Move(fileConTilde.FullName, fileOriginale.FullName);
     }
 
-		//Crea un nuovo file aggiungengo una tilde all'inizio del nome del file.
-		//Attenzione, per ripristinare il file senza la tilde il metodo non è stato creato
-		//perchè bisgona eliminare prima il file originale (tramite fileOriginale.Delete(); )
-		//e poi spostarlo tramite questa: File.Move(fileConTilde.FullName, fileOriginale.FullName);
-		public static FileInfo creaFileConTilde(FileInfo nomeFile) {
-			FileInfo nomeFileConTilde = new FileInfo(nomeFile.DirectoryName + "~" + nomeFile.Name);
-			FileStream fsNomeFileConTilde = nomeFileConTilde.Create();
-			fsNomeFileConTilde.Close();
-			return nomeFileConTilde;
-		}
   }
 }
 
