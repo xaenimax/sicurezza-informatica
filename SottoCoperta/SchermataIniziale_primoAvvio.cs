@@ -41,14 +41,17 @@ namespace SottoCoperta
         FileStream fs = new FileStream(Parametri.fileconf, FileMode.Open);
         BinaryWriter bw = new BinaryWriter(fs);
 
+        // genera le stringhe casuali sts_11 e sts_12
         GeneratoreDiRandom.creaArrayRandom(ref Parametri.sts_11);
         GeneratoreDiRandom.creaArrayRandom(ref Parametri.sts_12);
 
+        // scrive sts_11 nel file .conf
         for (int i = 0; i < Parametri.sts_11.Length; i++)
         {
           bw.Write(Parametri.sts_11[i]);
         }
 
+        // scrive sts_12 nel file .conf
         for (int i = 0; i < Parametri.sts_12.Length; i++)
         {
           bw.Write(Parametri.sts_12[i]);
@@ -56,9 +59,11 @@ namespace SottoCoperta
 
         byte[] frase = new byte[16];
         frase = GeneratoreDiRandom.generaByteRandom(frase.Length);
+
         byte[] md5_frase = new byte[16];
         md5_frase = GeneratoreDiRandom.calcolaMd5(frase);
 
+        // scrive la una frase random e la sua impronta nel file .conf
         for (int i = 0; i < frase.Length ; i++)
         {
           bw.Write(frase[i]);
@@ -72,7 +77,6 @@ namespace SottoCoperta
         fs.Close();
         // manca la crittografia del file
 
-        FileSystem filesystem = new FileSystem();
 
         Program.cambiaFormDalPrimo(this, new MenuPrincipale());
       }

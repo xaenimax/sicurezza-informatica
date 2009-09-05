@@ -11,17 +11,18 @@ namespace SottoCoperta
   class FileSystem
   {
 
-    private void inserisciFile(string percorso , bool cancel , bool crypt)
+    public static void inserisciFile(string percorso , bool cancel , bool crypt)
     {
 
       FileInfo fileDaDividere = new FileInfo(percorso);
       string nomeFile = fileDaDividere.Name;
       FileStream fsDaDividere = fileDaDividere.Open(FileMode.Open, FileAccess.Read);
+      
       //calcolo il numero di byte che ci saranno per parte
-
       int numeroDiBytePerFile = (int)(fileDaDividere.Length / Parametri.n_split);
       long resto = fileDaDividere.Length % Parametri.n_split;
 
+      // creo i file splittati 
       FileStream[] fsFileSplittato = new FileStream[Parametri.n_split];
       FileInfo[] fileSplittato = new FileInfo[Parametri.n_split];
 
@@ -38,15 +39,16 @@ namespace SottoCoperta
         }
 
         b = false;
-
       }
 
       for (int i = 0; i < Parametri.n_split; i++)
       {
         fileSplittato[i] = new FileInfo(Parametri.cartella_filesystem + '\\' + nuovoNomeFile + i + ".007");
         fsFileSplittato[i] = fileSplittato[i].Create();
+        fileSplittato[i].Attributes |= FileAttributes.Hidden;
       }
 
+      // riempio i file splittati con il contenuto del file
       while (fsDaDividere.Position < fileDaDividere.Length)
       {
         long temp = fsDaDividere.Position % Parametri.n_split;
@@ -68,11 +70,12 @@ namespace SottoCoperta
 
       fsDaDividere.Close();
 
+      // se si è scelta l'opzione cassaforte il file viene cancellato
       if (cancel)
         File.Delete(percorso);
     }
 
-    private void estraiFile(String percorsoFileUnito , bool cancel)
+    public static void estraiFile(String percorsoFileUnito , bool cancel)
     {
 
       long numByte = 0;
@@ -132,7 +135,75 @@ namespace SottoCoperta
       MessageBox.Show("File ricostruito!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
     }
 
-  public void permutazione1(ref BitArray bit)
+
+
+  public static void filePermutazione1(string percorso)
+  {
+    FileInfo fileDaPermutare = new FileInfo(percorso);
+    FileStream fsFileDaPermutare = fileDaPermutare.Open(FileMode.Open, FileAccess.Read);
+
+    //calcolo il numero di byte che ci saranno per parte
+    int numeroDiBytePerFile = (int)(fileDaPermutare.Length);
+    
+
+    // creo i file splittati 
+    
+    FileInfo filePermutato = creaFileConTilde(fileDaPermutare);
+    FileStream fsFilePermutato = filePermutato.Create();
+    filePermutato.Attributes |= FileAttributes.Hidden;
+
+    for (int i = 0; i < numeroDiBytePerFile; i++)
+    {
+      byte in_byte = (byte)fsFileDaPermutare.ReadByte();
+      BitArray in_bit = new BitArray(in_byte);
+      permutazione1(ref in_bit);
+      in_byte = ConvertToByte(in_bit);
+      fsFilePermutato.WriteByte(in_byte);
+    }
+
+    fsFileDaPermutare.Close();
+    fileDaPermutare.Delete();
+    fsFilePermutato.Close();
+    File.Move(filePermutato.FullName, fileDaPermutare.FullName);
+
+  }
+
+
+
+  public static void fileInvPermutazione1(string percorso)
+  {
+    FileInfo fileDaPermutare = new FileInfo(percorso);
+    FileStream fsFileDaPermutare = fileDaPermutare.Open(FileMode.Open, FileAccess.Read);
+
+    //calcolo il numero di byte che ci saranno per parte
+    int numeroDiBytePerFile = (int)(fileDaPermutare.Length);
+
+
+    // creo i file splittati 
+
+    FileInfo filePermutato = creaFileConTilde(fileDaPermutare);
+    FileStream fsFilePermutato = filePermutato.Create();
+    filePermutato.Attributes |= FileAttributes.Hidden;
+
+    for (int i = 0; i < numeroDiBytePerFile; i++)
+    {
+      byte in_byte = (byte)fsFileDaPermutare.ReadByte();
+      BitArray in_bit = new BitArray(in_byte);
+      inv_permutazione1(ref in_bit);
+      in_byte = ConvertToByte(in_bit);
+      fsFilePermutato.WriteByte(in_byte);
+    }
+
+    fsFileDaPermutare.Close();
+    fileDaPermutare.Delete();
+    fsFilePermutato.Close();
+    File.Move(filePermutato.FullName, fileDaPermutare.FullName);
+
+  }
+
+
+  // permutazione 1 su un byte
+  public static void permutazione1(ref BitArray bit)
   {
     BitArray newbit = new BitArray(bit.Length);
 
@@ -143,7 +214,8 @@ namespace SottoCoperta
     bit = newbit;
   }
 
-  public void inv_permutazione1(ref BitArray bit)
+  // inversa permutazione 1 su un byte
+  public static void inv_permutazione1(ref BitArray bit)
   {
     BitArray newbit = new BitArray(bit.Length);
 
@@ -154,7 +226,8 @@ namespace SottoCoperta
     bit = newbit;
   }
 
-  public byte ConvertToByte(BitArray bits)
+  // converte i bit in byte
+  public static byte ConvertToByte(BitArray bits)
   {
     if (bits.Count != 8)
     {
@@ -163,6 +236,19 @@ namespace SottoCoperta
     byte[] bytes = new byte[1];
     bits.CopyTo(bytes, 0);
     return bytes[0];
+  }
+
+
+  //Crea un nuovo file aggiungengo una tilde all'inizio del nome del file.
+  //Attenzione, per ripristinare il file senza la tilde il metodo non è stato creato
+  //perchè bisgona eliminare prima il file originale (tramite fileOriginale.Delete(); )
+  //e poi spostarlo tramite questa: File.Move(fileConTilde.FullName, fileOriginale.FullName);
+  public static FileInfo creaFileConTilde(FileInfo nomeFile)
+  {
+    FileInfo nomeFileConTilde = new FileInfo(nomeFile.DirectoryName + "~" + nomeFile.Name);
+    FileStream fsNomeFileConTilde = nomeFileConTilde.Create();
+    fsNomeFileConTilde.Close();
+    return nomeFileConTilde;
   }
 
   }
