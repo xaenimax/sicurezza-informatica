@@ -15,7 +15,7 @@ namespace SottoCoperta
         public static string fileconf; // file di configurazione
         public static string fileList; // lista di file del file system nascosto
         public static string fileIV; // lista di IV per l'opzione cassaforte
-        public static string Psw1; // la password di autenticazione
+        public static string Psw1; // la password di autenticazione in md5
 
 
         public Parametri()
