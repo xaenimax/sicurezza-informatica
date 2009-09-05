@@ -39,20 +39,20 @@ namespace SottoCoperta
         FileStream fsConf = new FileStream(Parametri.fileconf, FileMode.Open);
         BinaryWriter bw = new BinaryWriter(fsConf);
 
-        // genera le stringhe casuali sts_11 e sts_12
-        GeneratoreDiRandom.creaArrayRandom(ref Parametri.sts_11);
-        GeneratoreDiRandom.creaArrayRandom(ref Parametri.sts_12);
+        // genera le stringhe casuali sts_1 e sts_2
+        GeneratoreDiRandom.creaArrayRandom(ref Parametri.sts_1);
+        Parametri.sts_2 = GeneratoreDiRandom.generaByteRandom(Parametri.sts_2.Length);
 
-        // scrive sts_11 nel file .conf
-        for (int i = 0; i < Parametri.sts_11.Length; i++)
+        // scrive sts_1 nel file .conf
+        for (int i = 0; i < Parametri.sts_1.Length; i++)
         {
-          bw.Write(Parametri.sts_11[i]);
+          bw.Write(Parametri.sts_1[i]);
         }
 
-        // scrive sts_12 nel file .conf
-        for (int i = 0; i < Parametri.sts_12.Length; i++)
+        // scrive sts_2 nel file .conf
+        for (int i = 0; i < Parametri.sts_2.Length; i++)
         {
-          bw.Write(Parametri.sts_12[i]);
+          bw.Write(Parametri.sts_2[i]);
         }
 
         byte[] frase = new byte[16];
@@ -89,6 +89,14 @@ namespace SottoCoperta
 
         Program.cambiaFormDalPrimo(this, new MenuPrincipale());
       }
+<<<<<<< .mine
+      else
+      {
+        if (password_textbox.Text.Length >= 8)
+          MessageBox.Show("Attenzione, le password inserite non corrispondono");
+        if (password_textbox.Text.Length < 8)
+          MessageBox.Show("Attenzione, la lunghezza della password deve essere compresa tra 8 e 12 caratteri");
+=======
 			else
 			{
 				if(password_textbox.Text.Length >= 8)
@@ -101,7 +109,15 @@ namespace SottoCoperta
 				password_textbox.Focus();
 			}
 		}
+>>>>>>> .r36
 
+<<<<<<< .mine
+        password_textbox.Text = "";
+        ripeti_pwd_textbox.Text = "";
+        password_textbox.Focus();
+      }
+    }
+=======
 		private bool controllaPassword() {
 			if (password_textbox.Text != ripeti_pwd_textbox.Text)
 			{
@@ -114,7 +130,22 @@ namespace SottoCoperta
 			else
 				return true;
 		}
+>>>>>>> .r36
 
-		
-	}
+    private bool controllaPassword()
+    {
+      if (password_textbox.Text != ripeti_pwd_textbox.Text)
+      {
+        return false;
+      }
+      if (password_textbox.Text.Length < 8)
+      {
+        return false;
+      }
+      else
+        return true;
+    }
+
+
+  }
 }
