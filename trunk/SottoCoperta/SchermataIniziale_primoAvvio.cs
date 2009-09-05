@@ -36,10 +36,8 @@ namespace SottoCoperta
         
         passwordUtente = password_textbox.Text;
 
-        Parametri.Psw1 = passwordUtente;
-
-        FileStream fs = new FileStream(Parametri.fileconf, FileMode.Open);
-        BinaryWriter bw = new BinaryWriter(fs);
+        FileStream fsConf = new FileStream(Parametri.fileconf, FileMode.Open);
+        BinaryWriter bw = new BinaryWriter(fsConf);
 
         // genera le stringhe casuali sts_11 e sts_12
         GeneratoreDiRandom.creaArrayRandom(ref Parametri.sts_11);
@@ -74,8 +72,12 @@ namespace SottoCoperta
           bw.Write(md5_frase[i]);
         }
 
-        fs.Close();
-        // manca la crittografia del file
+        fsConf.Close();
+
+        passwordUtente = GeneratoreDiRandom.calcolaMd5(passwordUtente);
+        Parametri.Psw1 = passwordUtente;
+        RC4 rc4 = new RC4(passwordUtente);
+        rc4.effettuaXORconKS(Parametri.fileconf);
 
 
         Program.cambiaFormDalPrimo(this, new MenuPrincipale());
