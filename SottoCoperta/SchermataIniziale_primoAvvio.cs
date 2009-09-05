@@ -74,11 +74,18 @@ namespace SottoCoperta
 
         fsConf.Close();
 
+        // crittografia dei file di configurazione
         passwordUtente = GeneratoreDiRandom.calcolaMd5(passwordUtente);
         Parametri.Psw1 = passwordUtente;
-        RC4 rc4 = new RC4(passwordUtente);
+
+        RC4 rc4 = new RC4(Parametri.Psw1);
         rc4.effettuaXORconKS(Parametri.fileconf);
 
+        rc4.inizializzaChiaveRC4(Parametri.Psw1);
+        rc4.effettuaXORconKS(Parametri.fileIV);
+
+        rc4.inizializzaChiaveRC4(Parametri.Psw1);
+        rc4.effettuaXORconKS(Parametri.fileList);
 
         Program.cambiaFormDalPrimo(this, new MenuPrincipale());
       }

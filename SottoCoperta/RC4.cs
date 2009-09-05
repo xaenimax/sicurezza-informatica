@@ -68,6 +68,36 @@ namespace SottoCoperta
       }
     }
 
+    //inizializza la sbox con la chiave inserita dall'utente
+    public void inizializzaChiaveRC4(string key_str)
+    {
+      byte[] chiave = new byte[key_str.Length];
+
+      ASCIIEncoding encoding = new ASCIIEncoding();
+
+      chiave = encoding.GetBytes(key_str);
+
+      for (int i = 0; i < key.Length; i++)
+      {
+        key[i] = chiave[i % chiave.Length];
+      }
+
+      for (int i = 0; i < 256; i++)
+      {
+        s_box[i] = i;
+      }
+
+      int j = 0;
+
+      for (int i = 0; i < 256; i++)
+      {
+        j = (j + s_box[i] + (int)key[i % keylength]) % 256;
+        int temp = s_box[i];
+        s_box[i] = s_box[j];
+        s_box[j] = temp;
+      }
+    }
+
 		//Prende in ingresso un percorso di un file e effettua lo XOR con lo stream RC4
 		//e risalva il file preso in ingresso con lo stesso nome.
 		//ATTENZIONE: cifra & decifra! :D
