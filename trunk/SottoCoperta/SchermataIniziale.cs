@@ -6,14 +6,19 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace SottoCoperta
 {
 	public partial class SchermataIniziale : Form
 	{
+    private string passwordUtente;
+    private int numeroTentativi;
+
 		public SchermataIniziale()
 		{
 			InitializeComponent();
+      numeroTentativi = 0;
 			textbox_password.PasswordChar = '*';
 			textbox_password.MaxLength = 12;
 		}
@@ -25,7 +30,71 @@ namespace SottoCoperta
 
 		private void menuItem_conferma_action(object sender, EventArgs e)
 		{
-			Program.cambiaFormDalPrimo(this, new MenuPrincipale());
+      passwordUtente = textbox_password.Text;
+
+      // crittografia dei file di configurazione
+      passwordUtente = GeneratoreDiRandom.calcolaMd5(passwordUtente);
+      Parametri.Psw1 = passwordUtente;
+
+      byte[] memory;
+
+      RC4 rc4 = new RC4(Parametri.Psw1);
+      memory = rc4.effettuaXORinMemory(Parametri.fileconf);
+
+      for (int i = 0; i < Parametri.sts_1.Length; i++)
+      {
+        int temp = BitConverter.ToInt32(memory, i * 4);
+        Parametri.sts_1[i] = temp;
+      }
+
+      for (int i = 0; i < Parametri.sts_2.Length; i++)
+      {
+        int temp_index = (Parametri.sts_1.Length * 4) +i ;
+        Parametri.sts_2[i] = memory[temp_index];
+      }
+
+      byte[] frase = new byte[16];
+      byte[] md5_frase = new byte[16];
+
+      for (int i = 0; i < frase.Length; i++)
+      {
+        int temp_index = (Parametri.sts_1.Length * 4) + Parametri.sts_2.Length +i;
+        frase[i] = memory[temp_index];
+      }
+
+      for (int i = 0; i < md5_frase.Length; i++)
+      {
+        int temp_index = (Parametri.sts_1.Length * 4) + Parametri.sts_2.Length + frase.Length + i;
+        md5_frase[i] = memory[temp_index];
+      }
+
+      byte[] temp_frase_md5 = new byte[16]; 
+      temp_frase_md5 = GeneratoreDiRandom.calcolaMd5(frase);
+
+      bool array_uguali = true;
+
+      for (int i = 0; i < temp_frase_md5.Length && array_uguali; i++)
+      {
+        if (temp_frase_md5[i] == md5_frase[i])
+        {}
+        else
+        {
+          array_uguali = false;
+        }
+      }
+
+      if (!array_uguali)
+      {
+        MessageBox.Show("La password non è corretta!", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+        textbox_password.Hide();
+        textbox_password.Text = "";
+        //MessageBox.Show("Attendi " + 500*numeroTentativi " prima di reinserire la password!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+        Thread.Sleep(500 * numeroTentativi);
+        textbox_password.Show();
+        numeroTentativi++;
+      }
+      else
+			  Program.cambiaFormDalPrimo(this, new MenuPrincipale());
 		}
 	}
 }

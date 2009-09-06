@@ -152,6 +152,58 @@ namespace SottoCoperta
 			File.Move(fileConTilde.FullName, fileOriginale.FullName);
     }
 
+    //Prende in ingresso un percorso di un file e effettua lo XOR con lo stream RC4
+    //in memoria.
+    //ATTENZIONE: cifra & decifra! :D
+    public byte[] effettuaXORinMemory(string percorso)
+    {
+      FileStream inputFile = new FileStream(percorso, FileMode.Open, FileAccess.Read);
+      BinaryReader br = new BinaryReader(inputFile);
+
+      byte[] memory = new byte[inputFile.Length];
+
+      for (int l = 0; l < inputFile.Length; l++)
+      {
+        memory[l] = br.ReadByte();
+      }
+
+      int i = 0;
+      int j = 0;
+
+      //Scarto i primi 256byte dell'RC4
+      for (int l = 0; l < 256; l++)
+      {
+        i = (i + 1) % 256;
+        j = (j + s_box[i]) % 256;
+
+        int temp = s_box[i];
+        s_box[i] = s_box[j];
+        s_box[j] = temp;
+      }
+
+      //Ora faccio lo XOR
+      for (int l = 0; l < memory.Length; l++)
+      {
+        byte in_byte = memory[l];
+
+        i = (i + 1) % 256;
+        j = (j + s_box[i]) % 256;
+
+        int temp = s_box[i];
+        s_box[i] = s_box[j];
+        s_box[j] = temp;
+
+        byte stream_byte = (byte)s_box[(s_box[i] + s_box[j]) % 256];
+        byte out_byte = (byte)(in_byte ^ stream_byte);
+
+        memory[l] = out_byte;
+
+      }
+      inputFile.Close();
+      return memory;
+    }
+
+
   }
 }
 
