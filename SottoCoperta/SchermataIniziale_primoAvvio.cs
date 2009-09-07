@@ -82,9 +82,6 @@ namespace SottoCoperta
         rc4.effettuaXORconKS(Parametri.fileconf);
 
         rc4.inizializzaChiaveRC4(Parametri.Psw1);
-        rc4.effettuaXORconKS(Parametri.fileIV);
-
-        rc4.inizializzaChiaveRC4(Parametri.Psw1);
         rc4.effettuaXORconKS(Parametri.fileList);
 
         Program.cambiaFormDalPrimo(this, new MenuPrincipale());

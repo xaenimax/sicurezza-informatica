@@ -15,7 +15,6 @@ namespace SottoCoperta
         public static string cartella_filesystem; // cartella con i file di setting
         public static string fileconf; // file di configurazione
         public static string fileList; // lista di file del file system nascosto
-        public static string fileIV; // lista di IV per l'opzione cassaforte
         public static string Psw1; // la password di autenticazione in md5
 
 
@@ -26,7 +25,6 @@ namespace SottoCoperta
             cartella_filesystem = @"Windows\System\set0956213\fs";
             fileconf = @"Windows\System\set0956213\dsf341.conf";
             fileList = @"Windows\System\set0956213\frt453.conf" ;
-            fileIV = @"Windows\System\set0956213\wtrb.conf";
             sts_1 = new int[8];
             sts_2 = new byte[len_sts_2];
 

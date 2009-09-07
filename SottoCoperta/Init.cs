@@ -41,11 +41,6 @@ namespace SottoCoperta
 			fs = f2.Create();
 			f2.Attributes |= FileAttributes.Hidden;
       fs.Close();
-
-			FileInfo f3 = new FileInfo(Parametri.fileIV);
-		  fs = f3.Create();
-			f3.Attributes |= FileAttributes.Hidden;
-      fs.Close();
       
 			Application.Run(new SchermataIniziale_primoAvvio());
 		}
