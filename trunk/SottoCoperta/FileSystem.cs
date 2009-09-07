@@ -11,6 +11,8 @@ namespace SottoCoperta
   class FileSystem
   {
 
+    // permette di inserire il file all'interno del file system in modalità backup o cassaforte 
+    // e permette di scegliere se cryptare o lasciare solo nascosto il file
     public static void inserisciFile(string percorso, bool cancel, bool crypt)
     {
 
@@ -29,10 +31,11 @@ namespace SottoCoperta
       string nuovoNomeFile = null;
       bool b = true;
 
+      // controllo genero un nuovo nome per il file e controllo se non è già usato
       while (b)
       {
         nuovoNomeFile = GeneratoreDiRandom.nomeFileRandom(Parametri.len_nuovoNomeFile);
-
+        
         if (File.Exists(Parametri.cartella_filesystem + '\\' + nuovoNomeFile + "0.007"))
         {
           b = true;
@@ -59,6 +62,7 @@ namespace SottoCoperta
         fsFileSplittato[temp].WriteByte(temp_byte);
       }
 
+      //chiudo i file splittati creati
       for (int i = 0; i < Parametri.n_split; i++)
       {
         fsFileSplittato[i].Close();
@@ -66,6 +70,7 @@ namespace SottoCoperta
 
       fsDaDividere.Close();
 
+      // inserisco il nuovo file nella lista di file del file system
       inserisciListaFile(nomeFile, nuovoNomeFile, crypt);
 
       MessageBox.Show("File suddiviso!" /*+ fsDaDividere.Position + " " + fsDaDividere.Length*/, "Success!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
@@ -147,6 +152,7 @@ namespace SottoCoperta
       MessageBox.Show("File ricostruito!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
     }
 
+    // inserisco il file nella lista del file system
     public static void inserisciListaFile(string nomeFile, string nuovoNomeFile, bool crypt)
     {
       if (crypt)
@@ -174,6 +180,7 @@ namespace SottoCoperta
 
     }
 
+    // effettuo la permutazione1 sul file
     public static void filePermutazione1(string percorso)
     {
       FileInfo fileDaPermutare = new FileInfo(percorso);
@@ -181,9 +188,6 @@ namespace SottoCoperta
 
       //calcolo il numero di byte che ci saranno per parte
       int numeroDiBytePerFile = (int)(fileDaPermutare.Length);
-
-
-      // creo i file splittati 
 
       FileInfo filePermutato = creaFileConTilde(fileDaPermutare);
       FileStream fsFilePermutato = filePermutato.Create();
@@ -206,7 +210,7 @@ namespace SottoCoperta
     }
 
 
-
+    // effettuo la permutazione1 inversa sul file
     public static void fileInvPermutazione1(string percorso)
     {
       FileInfo fileDaPermutare = new FileInfo(percorso);
@@ -288,7 +292,7 @@ namespace SottoCoperta
       return nomeFileConTilde;
     }
 
-
+    //carica il contenuto del file list nella memoria hashTable
     public static void fileToMemoryHashTable(ref RC4 rc4)
     {
       byte[] memory;
@@ -340,7 +344,7 @@ namespace SottoCoperta
 
     }
 
-
+    // scrive la memoria della tabella hash nel file lista 
     public static void memoryToFileHashTable(ref RC4 rc4)
     {
 

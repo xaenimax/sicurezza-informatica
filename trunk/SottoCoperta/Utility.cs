@@ -8,6 +8,7 @@ namespace SottoCoperta
 {
   class Utility
   {
+    // estrae tutte le chiave dell'hashtable e le inserisce in un array di string
     public static string[] hashToString(ref Hashtable hashT)
     {
       string[] stringa = new string[hashT.Count];
