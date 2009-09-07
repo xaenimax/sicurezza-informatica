@@ -93,54 +93,11 @@ namespace SottoCoperta
       }
       else
       {
-        memory = null ;
-
-        rc4.inizializzaChiaveRC4(Parametri.Psw1);
-        memory = rc4.effettuaXORinMemory(Parametri.fileList);
-
-        for (int l = 0; l < memory.Length; l++)
-        {
-          int index1 = l;
-          while ('*' != (char)memory[l])
-          {
-            l++;
-          }
-          string chiaveHash ;
-          System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
-          chiaveHash = enc.GetString(memory , index1 , (l - index1) );
-
-          index1 = l;
-          string valoreHash;
-          string valore1Hash;
-          string valore2Hash;
-          
-          enc = null;
-          enc = new System.Text.ASCIIEncoding();
-          valore1Hash = enc.GetString(memory, index1, Parametri.len_nuovoNomeFile +1);
-          l = l + Parametri.len_nuovoNomeFile +1 ;
-          index1 = l;
-
-          if (':' == memory[l])
-          {
-            enc = null;
-            enc = new System.Text.ASCIIEncoding();
-            valore2Hash = enc.GetString(memory, index1, 1);
-          }
-          else
-          {
-            enc = null;
-            enc = new System.Text.ASCIIEncoding();
-            valore2Hash = enc.GetString(memory, index1, 2 + Parametri.len_IV);
-            l = l + Parametri.len_IV + 1;
-          }
-
-          valoreHash = valore1Hash + valore2Hash;
-          Parametri.memoryHash.Add(chiaveHash, valoreHash);
-        }
+        FileSystem.fileToMemoryHashTable(ref rc4 );
+      }
 
 
         Program.cambiaFormDalPrimo(this, new MenuPrincipale());
       }
 		}
 	}
-}
