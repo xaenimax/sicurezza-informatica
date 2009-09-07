@@ -88,8 +88,6 @@ namespace SottoCoperta
         MessageBox.Show("La password non è corretta!", "Errore", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
         textbox_password.Hide();
         textbox_password.Text = "";
-        //MessageBox.Show("Attendi " + 500*numeroTentativi " prima di reinserire la password!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-        Thread.Sleep(500 * numeroTentativi);
         textbox_password.Show();
         numeroTentativi++;
       }
