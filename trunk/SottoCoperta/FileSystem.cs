@@ -31,7 +31,7 @@ namespace SottoCoperta
 
       while (b)
       {
-        nuovoNomeFile = GeneratoreDiRandom.nomeFileRandom(12);
+        nuovoNomeFile = GeneratoreDiRandom.nomeFileRandom(Parametri.len_nuovoNomeFile);
         
         if (File.Exists(Parametri.cartella_filesystem + '\\' + nuovoNomeFile + "0.007"))
         {
