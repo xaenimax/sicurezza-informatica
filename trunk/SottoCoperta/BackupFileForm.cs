@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace SottoCoperta
 {
@@ -37,14 +38,25 @@ namespace SottoCoperta
 				check_nascondi_file.Hide();
 			}
 
+			//selezionaFileDialog.ShowDialog();
+			//nomeFileBackup = selezionaFileDialog.FileName;
 
-			selezionaFileDialog.ShowDialog();
-			nomeFileBackup = selezionaFileDialog.FileName;
+			OpenFileDialogEx selezionaFileDialog = new OpenFileDialogEx();
+			selezionaFileDialog.Filter = "*.*";
+			//selezionaFileDialog.Show();
+
+			if (selezionaFileDialog.ShowDialog() == DialogResult.OK)
+				nomeFileBackup = selezionaFileDialog.FileName;
+			if (selezionaFileDialog.FileName == "")
+				nomeFileBackup = "";
+
 			if (nomeFileBackup == "")
 				MessageBox.Show("Attenzione, non hai selezionato nessun file!");
 			else
 			{
-				label_fileSelezionato.Text = "Hai selezionato il file " + nomeFileBackup;
+				FileInfo fileSelezionato = new FileInfo(nomeFileBackup);
+
+				label_fileSelezionato.Text = "Hai selezionato il file\n" + fileSelezionato.Name;
 				label_fileSelezionato.Show();
 				effettua_backup_button.Show();
 				label_criptare.Show();

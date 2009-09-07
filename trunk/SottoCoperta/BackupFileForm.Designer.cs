@@ -90,15 +90,18 @@
 			// 
 			// label_fileSelezionato
 			// 
-			this.label_fileSelezionato.Location = new System.Drawing.Point(23, 133);
+			this.label_fileSelezionato.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular);
+			this.label_fileSelezionato.ForeColor = System.Drawing.Color.Red;
+			this.label_fileSelezionato.Location = new System.Drawing.Point(23, 126);
 			this.label_fileSelezionato.Name = "label_fileSelezionato";
-			this.label_fileSelezionato.Size = new System.Drawing.Size(189, 33);
+			this.label_fileSelezionato.Size = new System.Drawing.Size(189, 40);
 			// 
 			// effettua_backup_button
 			// 
-			this.effettua_backup_button.Location = new System.Drawing.Point(58, 224);
+			this.effettua_backup_button.BackColor = System.Drawing.Color.DeepSkyBlue;
+			this.effettua_backup_button.Location = new System.Drawing.Point(63, 224);
 			this.effettua_backup_button.Name = "effettua_backup_button";
-			this.effettua_backup_button.Size = new System.Drawing.Size(116, 25);
+			this.effettua_backup_button.Size = new System.Drawing.Size(111, 25);
 			this.effettua_backup_button.TabIndex = 6;
 			this.effettua_backup_button.Text = "Effettua backup";
 			this.effettua_backup_button.Click += new System.EventHandler(this.effettua_backup_button_action);

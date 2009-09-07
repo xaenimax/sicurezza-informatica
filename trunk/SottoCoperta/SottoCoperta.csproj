@@ -63,6 +63,12 @@
       <DependentUpon>BackupFileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileSystem.cs" />
+    <Compile Include="form_listaFilePresentiInArchivio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_listaFilePresentiInArchivio.Designer.cs">
+      <DependentUpon>form_listaFilePresentiInArchivio.cs</DependentUpon>
+    </Compile>
     <Compile Include="GeneratoreDiRandom.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="MenuPrincipale.cs">
@@ -71,6 +77,12 @@
     <Compile Include="MenuPrincipale.Designer.cs">
       <DependentUpon>MenuPrincipale.cs</DependentUpon>
     </Compile>
+    <Compile Include="OpenFileDialogEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OpenFileDialogEx.designer.cs">
+      <DependentUpon>OpenFileDialogEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Parametri.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,8 +90,16 @@
       <DependentUpon>BackupFileForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="form_listaFilePresentiInArchivio.resx">
+      <DependentUpon>form_listaFilePresentiInArchivio.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuPrincipale.resx">
       <DependentUpon>MenuPrincipale.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OpenFileDialogEx.resx">
+      <DependentUpon>OpenFileDialogEx.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -98,6 +118,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="RC4.cs" />
     <Compile Include="SchermataIniziale.cs">
