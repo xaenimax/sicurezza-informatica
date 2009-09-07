@@ -112,6 +112,7 @@
     <Compile Include="SchermataIniziale_primoAvvio.designer.cs">
       <DependentUpon>SchermataIniziale_primoAvvio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>
