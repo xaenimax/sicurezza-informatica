@@ -87,7 +87,7 @@ namespace SottoCoperta
         Program.cambiaFormDalPrimo(this, new MenuPrincipale());
       }
       else
-      {
+      { // 
         if (password_textbox.Text.Length >= 8)
           MessageBox.Show("Attenzione, le password inserite non corrispondono");
         if (password_textbox.Text.Length < 8)
@@ -99,6 +99,7 @@ namespace SottoCoperta
       }
     }
 
+    // funzione per il controllo delle due password
     private bool controllaPassword()
     {
       if (password_textbox.Text != ripeti_pwd_textbox.Text)

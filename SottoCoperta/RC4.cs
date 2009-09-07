@@ -12,7 +12,7 @@ namespace SottoCoperta
     private int[] s_box;
 		private byte[] key;
 
-		//Inizializza la sbox
+		//Inizializza la s-box 
     public RC4(byte[] chiave)
     {
       s_box = new int[256];
@@ -25,6 +25,7 @@ namespace SottoCoperta
 			inizializzaChiaveRC4(chiave);
     }
 
+    //Inizializza la s-box
     public RC4(string chiave)
     {
       s_box = new int[256];
