@@ -87,7 +87,7 @@ namespace SottoCoperta
 
       }
 			FileSystem.inserisciFile(nomeFileBackupConPercorso, check_nascondi_file.Checked, check_criptaFile.Checked);
-			MessageBox.Show("File inserito con successo");
+			Program.cambiaForm(this, new form_ConfermaAzione());
 		}
 
 		//private void menu_item_esci_action(object sender, EventArgs e)

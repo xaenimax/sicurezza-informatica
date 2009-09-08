@@ -29,6 +29,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SchermataIniziale_primoAvvio));
 			this.mainMenu1 = new System.Windows.Forms.MainMenu();
 			this.avanti_menuItem = new System.Windows.Forms.MenuItem();
 			this.quit_menuItem = new System.Windows.Forms.MenuItem();
@@ -39,6 +40,7 @@
 			this.ripeti_pwd = new System.Windows.Forms.Label();
 			this.ripeti_pwd_textbox = new System.Windows.Forms.TextBox();
 			this.label_lunghezza_password = new System.Windows.Forms.Label();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.SuspendLayout();
 			// 
 			// mainMenu1
@@ -112,12 +114,21 @@
 			this.label_lunghezza_password.Size = new System.Drawing.Size(217, 35);
 			this.label_lunghezza_password.Text = "La Password dovrà essere compresa tra 8 e 12 caratteri";
 			// 
+			// pictureBox1
+			// 
+			this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+			this.pictureBox1.Location = new System.Drawing.Point(98, 218);
+			this.pictureBox1.Name = "pictureBox1";
+			this.pictureBox1.Size = new System.Drawing.Size(53, 50);
+			this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			// 
 			// SchermataIniziale_primoAvvio
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.AutoScroll = true;
 			this.ClientSize = new System.Drawing.Size(240, 268);
+			this.Controls.Add(this.pictureBox1);
 			this.Controls.Add(this.label_lunghezza_password);
 			this.Controls.Add(this.ripeti_pwd_textbox);
 			this.Controls.Add(this.ripeti_pwd);
@@ -143,5 +154,6 @@
 		private System.Windows.Forms.MenuItem avanti_menuItem;
 		private System.Windows.Forms.MenuItem quit_menuItem;
 		private System.Windows.Forms.Label label_lunghezza_password;
+		private System.Windows.Forms.PictureBox pictureBox1;
 	}
 }
