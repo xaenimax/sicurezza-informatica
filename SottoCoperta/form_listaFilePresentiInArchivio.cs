@@ -38,6 +38,8 @@ namespace SottoCoperta
 				listBox_listaFile.Hide();
 				button_estraiFile.Hide();
 				label_titolo.Hide();
+				label_eliminaFile.Hide();
+				checkBox_eliminaFile.Hide();
 				label_avviso.Show();
 				picture_exlamation.Show();
 			}
@@ -55,8 +57,10 @@ namespace SottoCoperta
 
 		private void buttonEstraiFile_action(object sender, EventArgs e)
 		{
-			if (listBox_listaFile.Text != "")
-				MessageBox.Show("TODO!!" + listBox_listaFile.Text);
+			if (listBox_listaFile.Text != "") {
+				String percorso = @"\My Documents";
+				FileSystem.estraiFile(listBox_listaFile.Text, percorso, checkBox_eliminaFile.Checked);
+			}
 			else
 				MessageBox.Show("E' necessario selezionare un file per poterlo estrarre!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 		}

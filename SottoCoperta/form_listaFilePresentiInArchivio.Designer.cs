@@ -38,6 +38,8 @@
 			this.button_estraiFile = new System.Windows.Forms.Button();
 			this.label_avviso = new System.Windows.Forms.Label();
 			this.picture_exlamation = new System.Windows.Forms.PictureBox();
+			this.label_eliminaFile = new System.Windows.Forms.Label();
+			this.checkBox_eliminaFile = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// mainMenu1
@@ -73,7 +75,7 @@
 			// button_estraiFile
 			// 
 			this.button_estraiFile.BackColor = System.Drawing.Color.DeepSkyBlue;
-			this.button_estraiFile.Location = new System.Drawing.Point(61, 212);
+			this.button_estraiFile.Location = new System.Drawing.Point(61, 227);
 			this.button_estraiFile.Name = "button_estraiFile";
 			this.button_estraiFile.Size = new System.Drawing.Size(120, 23);
 			this.button_estraiFile.TabIndex = 3;
@@ -97,12 +99,28 @@
 			this.picture_exlamation.Name = "picture_exlamation";
 			this.picture_exlamation.Size = new System.Drawing.Size(65, 67);
 			// 
+			// label_eliminaFile
+			// 
+			this.label_eliminaFile.Location = new System.Drawing.Point(20, 183);
+			this.label_eliminaFile.Name = "label_eliminaFile";
+			this.label_eliminaFile.Size = new System.Drawing.Size(161, 17);
+			this.label_eliminaFile.Text = "Eliminare il file dall\'archivio? ";
+			// 
+			// checkBox_eliminaFile
+			// 
+			this.checkBox_eliminaFile.Location = new System.Drawing.Point(187, 183);
+			this.checkBox_eliminaFile.Name = "checkBox_eliminaFile";
+			this.checkBox_eliminaFile.Size = new System.Drawing.Size(25, 17);
+			this.checkBox_eliminaFile.TabIndex = 6;
+			// 
 			// form_listaFilePresentiInArchivio
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.AutoScroll = true;
 			this.ClientSize = new System.Drawing.Size(240, 268);
+			this.Controls.Add(this.checkBox_eliminaFile);
+			this.Controls.Add(this.label_eliminaFile);
 			this.Controls.Add(this.picture_exlamation);
 			this.Controls.Add(this.label_avviso);
 			this.Controls.Add(this.button_estraiFile);
@@ -124,5 +142,7 @@
 		private System.Windows.Forms.Button button_estraiFile;
 		private System.Windows.Forms.Label label_avviso;
 		private System.Windows.Forms.PictureBox picture_exlamation;
+		private System.Windows.Forms.Label label_eliminaFile;
+		private System.Windows.Forms.CheckBox checkBox_eliminaFile;
 	}
 }
