@@ -13,7 +13,8 @@ namespace SottoCoperta
 	public partial class BackupFileForm : Form
 	{
 
-		private String nomeFileBackup;
+		private String nomeFileBackupConPercorso;
+    private string nomeFileBackup; 
 
 		public BackupFileForm()
 		{
@@ -46,17 +47,18 @@ namespace SottoCoperta
 			//selezionaFileDialog.Show();
 
 			if (selezionaFileDialog.ShowDialog() == DialogResult.OK)
-				nomeFileBackup = selezionaFileDialog.FileName;
+				nomeFileBackupConPercorso = selezionaFileDialog.FileName;
 			if (selezionaFileDialog.FileName == "")
-				nomeFileBackup = "";
+				nomeFileBackupConPercorso = "";
 
-			if (nomeFileBackup == "")
+			if (nomeFileBackupConPercorso == "")
 				MessageBox.Show("Attenzione, non hai selezionato nessun file!");
 			else
 			{
-				FileInfo fileSelezionato = new FileInfo(nomeFileBackup);
+				FileInfo fileSelezionato = new FileInfo(nomeFileBackupConPercorso);
+        nomeFileBackup = fileSelezionato.Name;
 
-				label_fileSelezionato.Text = "Hai selezionato il file\n" + fileSelezionato.Name;
+				label_fileSelezionato.Text = "Hai selezionato il file\n" + nomeFileBackup;
 				label_fileSelezionato.Show();
 				effettua_backup_button.Show();
 				label_criptare.Show();
@@ -73,7 +75,18 @@ namespace SottoCoperta
 
 		private void effettua_backup_button_action(object sender, EventArgs e)
 		{
-			FileSystem.inserisciFile(nomeFileBackup, check_nascondi_file.Checked, check_criptaFile.Checked);
+      if (Parametri.memoryHash.Contains(nomeFileBackup))
+      {
+        MessageBox.Show("Il file selezionato è già presente in archivio");
+        label_fileSelezionato.Hide();
+        effettua_backup_button.Hide();
+        label_criptare.Hide();
+        check_criptaFile.Hide();
+        label_nascondi.Hide();
+        check_nascondi_file.Hide();
+
+      }
+			FileSystem.inserisciFile(nomeFileBackupConPercorso, check_nascondi_file.Checked, check_criptaFile.Checked);
 			MessageBox.Show("File inserito con successo");
 		}
 
