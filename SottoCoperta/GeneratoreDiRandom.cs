@@ -58,8 +58,7 @@ namespace SottoCoperta
 			MD5 controlloreMd5 = MD5.Create();
 			hashInByte = controlloreMd5.ComputeHash(stringaConvertitaInByte);
 
-			for (int i = 0; i < hashInByte.Length; i++)
-				stringaMd5 += hashInByte[i].ToString("x2");
+      stringaMd5 = encoding.GetString(hashInByte, 0, hashInByte.Length);
 
 			return stringaMd5;
 		}

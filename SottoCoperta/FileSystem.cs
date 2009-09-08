@@ -212,10 +212,11 @@ namespace SottoCoperta
         vettoreIV = GeneratoreDiRandom.generaByteRandom(Parametri.len_IV);
         string temp_string = "" ;
 
-        for (int j = 0; j < vettoreIV.Length; j++)
-          temp_string += vettoreIV[j].ToString("x2");
+        ASCIIEncoding encoding = new ASCIIEncoding();
+        temp_string = encoding.GetString(vettoreIV, 0, vettoreIV.Length);
 
         string value = "*" + nuovoNomeFile + "?" + temp_string + ":";
+        
         Parametri.memoryHash.Add(nomeFile, value);   
 
       }
@@ -384,6 +385,8 @@ namespace SottoCoperta
     {
       byte[] memory;
 
+      Parametri.memoryHash.Clear();
+
       rc4.inizializzaChiaveRC4(Parametri.Psw1);
       memory = rc4.effettuaXORinMemory(Parametri.fileList);
 
@@ -424,7 +427,14 @@ namespace SottoCoperta
         }
 
         valoreHash = valore1Hash + valore2Hash;
-        Parametri.memoryHash.Add(chiaveHash, valoreHash);
+
+        enc = null;
+        enc = new System.Text.ASCIIEncoding();
+        string temp = enc.GetString(memory, 0, memory.Length);
+        
+
+        Parametri.memoryHash.Add(chiaveHash , valoreHash);
+        
       }
 
 
