@@ -66,7 +66,7 @@
 			this.button_recupera.Size = new System.Drawing.Size(120, 23);
 			this.button_recupera.TabIndex = 1;
 			this.button_recupera.Text = "Recupera un File";
-			this.button_recupera.Click += new System.EventHandler(this.button1_Click);
+			this.button_recupera.Click += new System.EventHandler(this.buttonRecupera_action);
 			// 
 			// button_backup
 			// 

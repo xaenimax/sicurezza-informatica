@@ -29,12 +29,15 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form_listaFilePresentiInArchivio));
 			this.mainMenu1 = new System.Windows.Forms.MainMenu();
 			this.menuItem_indietro = new System.Windows.Forms.MenuItem();
 			this.menuItem_esci = new System.Windows.Forms.MenuItem();
 			this.label_titolo = new System.Windows.Forms.Label();
 			this.listBox_listaFile = new System.Windows.Forms.ListBox();
 			this.button_estraiFile = new System.Windows.Forms.Button();
+			this.label_avviso = new System.Windows.Forms.Label();
+			this.picture_exlamation = new System.Windows.Forms.PictureBox();
 			this.SuspendLayout();
 			// 
 			// mainMenu1
@@ -77,12 +80,31 @@
 			this.button_estraiFile.Text = "Estrai file";
 			this.button_estraiFile.Click += new System.EventHandler(this.buttonEstraiFile_action);
 			// 
+			// label_avviso
+			// 
+			this.label_avviso.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+			this.label_avviso.ForeColor = System.Drawing.Color.Red;
+			this.label_avviso.Location = new System.Drawing.Point(19, 36);
+			this.label_avviso.Name = "label_avviso";
+			this.label_avviso.Size = new System.Drawing.Size(207, 147);
+			this.label_avviso.Text = "ATTENZIONE!\n\n\n\n\n Non sono presenti file all\'interno dell\'archivio";
+			this.label_avviso.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+			// 
+			// picture_exlamation
+			// 
+			this.picture_exlamation.Image = ((System.Drawing.Image)(resources.GetObject("picture_exlamation.Image")));
+			this.picture_exlamation.Location = new System.Drawing.Point(90, 62);
+			this.picture_exlamation.Name = "picture_exlamation";
+			this.picture_exlamation.Size = new System.Drawing.Size(65, 67);
+			// 
 			// form_listaFilePresentiInArchivio
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.AutoScroll = true;
 			this.ClientSize = new System.Drawing.Size(240, 268);
+			this.Controls.Add(this.picture_exlamation);
+			this.Controls.Add(this.label_avviso);
 			this.Controls.Add(this.button_estraiFile);
 			this.Controls.Add(this.listBox_listaFile);
 			this.Controls.Add(this.label_titolo);
@@ -100,5 +122,7 @@
 		private System.Windows.Forms.MenuItem menuItem_indietro;
 		private System.Windows.Forms.MenuItem menuItem_esci;
 		private System.Windows.Forms.Button button_estraiFile;
+		private System.Windows.Forms.Label label_avviso;
+		private System.Windows.Forms.PictureBox picture_exlamation;
 	}
 }

@@ -73,7 +73,8 @@ namespace SottoCoperta
 
 		private void effettua_backup_button_action(object sender, EventArgs e)
 		{
-			MessageBox.Show("TODO!!!");
+			FileSystem.inserisciFile(nomeFileBackup, check_nascondi_file.Checked, check_criptaFile.Checked);
+			MessageBox.Show("File inserito con successo");
 		}
 
 		//private void menu_item_esci_action(object sender, EventArgs e)

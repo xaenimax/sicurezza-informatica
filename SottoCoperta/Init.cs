@@ -14,7 +14,6 @@ namespace SottoCoperta
 			if (Directory.Exists(Parametri.cartella))
 			{
 				return false;
-
 			}
 			return true;
 		}
@@ -29,8 +28,8 @@ namespace SottoCoperta
 			dirInfo.Attributes |= FileAttributes.Hidden;
 
       DirectoryInfo dirInfoSystem = new DirectoryInfo(Parametri.cartella_filesystem);
-      dirInfo.Create();
-      dirInfo.Attributes |= FileAttributes.Hidden;
+			dirInfoSystem.Create();
+			dirInfoSystem.Attributes |= FileAttributes.Hidden;
 
 			FileInfo f1 = new FileInfo(Parametri.fileconf);
 			fs = f1.Create();
