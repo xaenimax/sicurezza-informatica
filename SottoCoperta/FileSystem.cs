@@ -134,7 +134,12 @@ namespace SottoCoperta
       // descrittori dei file splittati
       FileInfo[] fileDaRiunire = new FileInfo[Parametri.n_split];
       FileStream[] fsFileDaRiunire = new FileStream[Parametri.n_split];
-      
+
+      for (int i = 0; i < Parametri.n_split; i++)
+      {
+        fileDaRiunire[i] = new FileInfo(Parametri.cartella_filesystem + '\\' + nomeFileDiviso + i + ".007");
+      }
+
       // faccio encrypt dei file splittati
       if(crypt)
       {
@@ -158,7 +163,6 @@ namespace SottoCoperta
         // encrypt dei file splittati
         for (int i = 0; i < Parametri.n_split; i++)
         {
-          fileDaRiunire[i] = new FileInfo(Parametri.cartella_filesystem + '\\' + nomeFileDiviso + i + ".007");
           rc4.inizializzaChiaveRC4(temp_key);
           rc4.effettuaXORconKS(fileDaRiunire[i].FullName);
         }
