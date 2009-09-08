@@ -12,30 +12,34 @@ namespace SottoCoperta
 	public partial class form_listaFilePresentiInArchivio : Form
 	{
 
-		private String[] stringhe = new String[3];
+		private RC4 rc;
 
 		public form_listaFilePresentiInArchivio()
 		{
 			InitializeComponent();
-			stringhe[0] = "viao";
-			stringhe[1] = "ciao";
-			stringhe[2] = "ciaa";
-			ordinaEpopolaListaFile(stringhe);
+			rc = new RC4(Parametri.Psw1);
+			FileSystem.fileToMemoryHashTable(ref rc);
+			label_avviso.Hide();
+			picture_exlamation.Hide();
+			ordinaEpopolaListaFile();
 		}
 
-		public void ordinaEpopolaListaFile(String[] listaFile) {
+		public void ordinaEpopolaListaFile()
+		{
+			String[] listaFile;
+			listaFile = Utility.hashToString(ref Parametri.memoryHash);
 
-			Array.Sort(listaFile);
-
-			int j = 0;
-
-			while (j < 5)
+			for (int i = 0; i < listaFile.Length; i++)
 			{
-				for (int i = 0; i < listaFile.Length; i++)
-				{
-					listBox_listaFile.Items.Add(listaFile[i]);
-				}
-				j++;
+				listBox_listaFile.Items.Add(listaFile[i]);
+			}
+
+			if (listaFile.Length == 0) {
+				listBox_listaFile.Hide();
+				button_estraiFile.Hide();
+				label_titolo.Hide();
+				label_avviso.Show();
+				picture_exlamation.Show();
 			}
 		}
 
@@ -51,7 +55,7 @@ namespace SottoCoperta
 
 		private void buttonEstraiFile_action(object sender, EventArgs e)
 		{
-			if(listBox_listaFile.Text != "")
+			if (listBox_listaFile.Text != "")
 				MessageBox.Show("TODO!!" + listBox_listaFile.Text);
 			else
 				MessageBox.Show("E' necessario selezionare un file per poterlo estrarre!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);

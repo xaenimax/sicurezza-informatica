@@ -26,14 +26,14 @@ namespace SottoCoperta
 			Program.close();
 		}
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-
-		}
-
 		private void button_backup_action(object sender, EventArgs e)
 		{
 			Program.cambiaForm(this, new BackupFileForm());
+		}
+
+		private void buttonRecupera_action(object sender, EventArgs e)
+		{
+			Program.cambiaForm(this, new form_listaFilePresentiInArchivio());
 		}
 	}
 }

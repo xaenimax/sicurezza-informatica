@@ -356,9 +356,10 @@ namespace SottoCoperta
       {
         throw new ArgumentException("bits");
       }
-      byte[] bytes = new byte[1];
-      bits.CopyTo(bytes, 0);
-      return bytes[0];
+      byte[] aabytes = new byte[1];
+			aabytes.Initialize();
+      bits.CopyTo(aabytes, 0);
+      return aabytes[0];
     }
 
 

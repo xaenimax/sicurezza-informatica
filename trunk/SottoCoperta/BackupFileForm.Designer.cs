@@ -73,11 +73,11 @@
 			this.label_titoloFormBackup.Location = new System.Drawing.Point(43, 14);
 			this.label_titoloFormBackup.Name = "label_titoloFormBackup";
 			this.label_titoloFormBackup.Size = new System.Drawing.Size(157, 20);
-			this.label_titoloFormBackup.Text = "Archivia di un file";
+			this.label_titoloFormBackup.Text = "Archivia un file";
 			// 
 			// button_selezionaFile
 			// 
-			this.button_selezionaFile.Location = new System.Drawing.Point(63, 92);
+			this.button_selezionaFile.Location = new System.Drawing.Point(63, 81);
 			this.button_selezionaFile.Name = "button_selezionaFile";
 			this.button_selezionaFile.Size = new System.Drawing.Size(111, 20);
 			this.button_selezionaFile.TabIndex = 2;
@@ -92,14 +92,14 @@
 			// 
 			this.label_fileSelezionato.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular);
 			this.label_fileSelezionato.ForeColor = System.Drawing.Color.Red;
-			this.label_fileSelezionato.Location = new System.Drawing.Point(23, 126);
+			this.label_fileSelezionato.Location = new System.Drawing.Point(23, 116);
 			this.label_fileSelezionato.Name = "label_fileSelezionato";
 			this.label_fileSelezionato.Size = new System.Drawing.Size(189, 40);
 			// 
 			// effettua_backup_button
 			// 
 			this.effettua_backup_button.BackColor = System.Drawing.Color.DeepSkyBlue;
-			this.effettua_backup_button.Location = new System.Drawing.Point(63, 224);
+			this.effettua_backup_button.Location = new System.Drawing.Point(63, 225);
 			this.effettua_backup_button.Name = "effettua_backup_button";
 			this.effettua_backup_button.Size = new System.Drawing.Size(111, 25);
 			this.effettua_backup_button.TabIndex = 6;
@@ -108,7 +108,7 @@
 			// 
 			// check_criptaFile
 			// 
-			this.check_criptaFile.Location = new System.Drawing.Point(188, 178);
+			this.check_criptaFile.Location = new System.Drawing.Point(188, 166);
 			this.check_criptaFile.Name = "check_criptaFile";
 			this.check_criptaFile.Size = new System.Drawing.Size(24, 18);
 			this.check_criptaFile.TabIndex = 11;
@@ -116,21 +116,21 @@
 			// 
 			// label_criptare
 			// 
-			this.label_criptare.Location = new System.Drawing.Point(26, 178);
+			this.label_criptare.Location = new System.Drawing.Point(27, 166);
 			this.label_criptare.Name = "label_criptare";
 			this.label_criptare.Size = new System.Drawing.Size(147, 18);
 			this.label_criptare.Text = "Si desidera criptare il file?";
 			// 
 			// label_nascondi
 			// 
-			this.label_nascondi.Location = new System.Drawing.Point(12, 202);
+			this.label_nascondi.Location = new System.Drawing.Point(23, 187);
 			this.label_nascondi.Name = "label_nascondi";
-			this.label_nascondi.Size = new System.Drawing.Size(171, 19);
-			this.label_nascondi.Text = "Si desidera nascondere il file?";
+			this.label_nascondi.Size = new System.Drawing.Size(171, 35);
+			this.label_nascondi.Text = "Si desidera eliminare il file originale?";
 			// 
 			// check_nascondi_file
 			// 
-			this.check_nascondi_file.Location = new System.Drawing.Point(188, 202);
+			this.check_nascondi_file.Location = new System.Drawing.Point(188, 203);
 			this.check_nascondi_file.Name = "check_nascondi_file";
 			this.check_nascondi_file.Size = new System.Drawing.Size(22, 19);
 			this.check_nascondi_file.TabIndex = 14;

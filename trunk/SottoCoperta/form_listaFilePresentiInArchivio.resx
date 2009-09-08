@@ -120,6 +120,39 @@
   <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="picture_exlamation.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        /9j/4AAQSkZJRgABAQEAlgCWAAD/4QAWRXhpZgAASUkqAAgAAAAAAAAAAAD/2wBDAAgGBgcGBQgHBwcJ
+        CQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJ
+        CQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy
+        MjL/wAARCAA8ADwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAA
+        AgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRol
+        JicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZ
+        mqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QA
+        HwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx
+        BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RV
+        VldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPE
+        xcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3q4nS2iMj9BXOX/jG
+        0tHMYZC/937zfkM1o67N5VhNJ/zyiaT8QOKwvDOg2MunpLKgMmMt7n1rjxOInCSp00m33OvD0acoOpVb
+        suxVk8aX8n/HvazEepjVf5k1XbxXrXUwEf8AA1/+Jrpp7C2j4SMAVn2OhvqlmLg3SxksylRFnGGI659q
+        4JVcdKXLCSv6f5nZFYJR5pR09X+hkDxlqiffgcj2ZD/QVag8dspAuI5E9d0PH5rmqut6SNKuIYvP87zE
+        Zj8m3GCB61iSr6VyTzLF0J8lSza/rod1PAYSvBSgmk/P/M9AsPFVne8RyRuR12MCR+HX9K3oZVmjDr0r
+        xu1cQavZT4GUnQE47E7T/OvWrFvKhaM/wuRXsYDGfWoOTVmjycfg1hZpRd0zO8UgnRNRx1+zMaydAvvL
+        tAma6TVIVnt5In+5NE0Z/EYrzTT7xraECQ7WT5GB9Rwf5VxZpKVKrCovNHVl1NVqM6fW6Z3M90GBOal8
+        NXEclldIjZ8u6cH2zhv61xcmrNKMZwvpW14NuATqaZ/5axv+a4/9lrPA4lVMQl5MvF4N0sO5PyMzxvdM
+        /iHyg52xWycA9ySf6CuNuHYEkMfzrd8U3Hm+JtQb+6Uj/JB/jXOTvXlY6XNipvzPey+HLhoLyEt7qf7b
+        bxb9waVBhuf4hXuaZDy4/v8A9BXinhu1N94p0+LGUWUSv7KvP9K9vs182N5D/E5Ne5k8LU5PuzxM/kva
+        wiu35k9zF51uy98cV4/4rtpbHVzcciKVvmHZX9fxHP517NXL+K9BGo2bsibmxyv94f4+ld2Lw6xFJwfy
+        PMwOKeGrKfTr6HmMV1kDmtrQLzVbea6l02yS6VgiSb3C7SMkd/euVmjksZzFJkjOAxGPwPoa3fD/AIht
+        9JhuFnjlcysrAxgHoMdzXzmEpOhibVHy2ufVYt+2wrlRXPe2nzKertdrqd019CIbiV/NZAcgZ6c1kTSd
+        a0Nd1SPVNVe5gV1VkVQHHOQPamaVpMuo3saMpYZ+56+xPp60nh3VxEo09bvf9TWNdUMMp1ly2S0/Q6bw
+        HpboHvWXEs4wn+yn/wBc/wAq9UtovKgVKydD0tbS3UkZPc46mtuvqaFJUaaguh8ZisRLEVXUl1CkIDAg
+        jINLRWpznMa74WtNQDyeUpLfe46//X964C/8FXVmWkt0muYM/dj5dfqO/wBRXs1VpbWMkyLuRx3U1zYn
+        CU8QrS37nZhMdWwr9x6duh5dpvguY4ku08gHpGTlz/vHt9BXd6NoEFkgKxhQRyccn/61a0NnEmH5Zjzl
+        jmrNVh8NToR5YIjE4uriZc1RiAADAGBS0UVucx//2Q==
+</value>
+  </data>
   <metadata name="$this.FormFactorShadowProperty" xml:space="preserve">
     <value>Pocket_PC</value>
   </metadata>
