@@ -247,6 +247,7 @@ namespace SottoCoperta
         
         ASCIIEncoding encoding = new ASCIIEncoding();
         vettoreIV = encoding.GetBytes(str_vettoreIV);
+        crypt = true;
       }
       else
       {
