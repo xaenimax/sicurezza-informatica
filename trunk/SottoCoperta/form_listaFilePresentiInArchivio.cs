@@ -58,7 +58,7 @@ namespace SottoCoperta
 		private void buttonEstraiFile_action(object sender, EventArgs e)
 		{
 			if (listBox_listaFile.Text != "") {
-				String percorso = @"\My Documents";
+				String percorso = @"\My Documents\";
 				FileSystem.estraiFile(listBox_listaFile.Text, percorso, checkBox_eliminaFile.Checked);
 			}
 			else
