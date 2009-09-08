@@ -55,11 +55,12 @@ namespace SottoCoperta
       while (fsDaDividere.Position < fileDaDividere.Length)
       {
         long temp = fsDaDividere.Position % Parametri.n_split;
-        byte temp_byte = (byte)fsDaDividere.ReadByte();
+        byte[] temp_byte = new byte[1];
+        temp_byte[0] = (byte)fsDaDividere.ReadByte();
         BitArray temp_bit = new BitArray(temp_byte);
         permutazione1(ref temp_bit);
-        temp_byte = ConvertToByte(temp_bit);
-        fsFileSplittato[temp].WriteByte(temp_byte);
+        temp_byte[0] = ConvertToByte(temp_bit);
+        fsFileSplittato[temp].WriteByte(temp_byte[0]);
       }
 
       //chiudo i file splittati creati
@@ -174,11 +175,12 @@ namespace SottoCoperta
       for (int i = 0; i < numByte; i++)
       {
         long temp = i % Parametri.n_split;
-        byte temp_byte = (byte)fsFileDaRiunire[temp].ReadByte();
+        byte[] temp_byte = new byte[1];
+        temp_byte[0] = (byte)fsFileDaRiunire[temp].ReadByte();
         BitArray temp_bit = new BitArray(temp_byte);
         inv_permutazione1(ref temp_bit);
-        temp_byte = ConvertToByte(temp_bit);
-        fsFileUnito.WriteByte(temp_byte);
+        temp_byte[0] = ConvertToByte(temp_bit);
+        fsFileUnito.WriteByte(temp_byte[0]);
       }
 
       for (int i = 0; i < Parametri.n_split; i++)
@@ -277,11 +279,12 @@ namespace SottoCoperta
 
       for (int i = 0; i < numeroDiBytePerFile; i++)
       {
-        byte in_byte = (byte)fsFileDaPermutare.ReadByte();
+        byte[] in_byte = new byte[1];
+        in_byte[0] = (byte)fsFileDaPermutare.ReadByte();
         BitArray in_bit = new BitArray(in_byte);
         permutazione1(ref in_bit);
-        in_byte = ConvertToByte(in_bit);
-        fsFilePermutato.WriteByte(in_byte);
+        in_byte[0] = ConvertToByte(in_bit);
+        fsFilePermutato.WriteByte(in_byte[0]);
       }
 
       fsFileDaPermutare.Close();
@@ -310,11 +313,12 @@ namespace SottoCoperta
 
       for (int i = 0; i < numeroDiBytePerFile; i++)
       {
-        byte in_byte = (byte)fsFileDaPermutare.ReadByte();
+        byte[] in_byte = new byte[1];
+        in_byte[0] = (byte)fsFileDaPermutare.ReadByte();
         BitArray in_bit = new BitArray(in_byte);
         inv_permutazione1(ref in_bit);
-        in_byte = ConvertToByte(in_bit);
-        fsFilePermutato.WriteByte(in_byte);
+        in_byte[0] = ConvertToByte(in_bit);
+        fsFilePermutato.WriteByte(in_byte[0]);
       }
 
       fsFileDaPermutare.Close();
@@ -356,10 +360,10 @@ namespace SottoCoperta
       {
         throw new ArgumentException("bits");
       }
-      byte[] aabytes = new byte[1];
-			aabytes.Initialize();
-      bits.CopyTo(aabytes, 0);
-      return aabytes[0];
+      byte[] bytes = new byte[1];
+			bytes.Initialize();
+      bits.CopyTo(bytes, 0);
+      return bytes[0];
     }
 
 
@@ -450,11 +454,14 @@ namespace SottoCoperta
         fsNuovoFile.Write(key_byte, 0, key_byte.Length);
         fsNuovoFile.Write(value_byte, 0, value_byte.Length);
       }
-      rc4.inizializzaChiaveRC4(Parametri.Psw1);
-      rc4.effettuaXORconKS(nuovoFile.FullName);
+      
       fsFileOriginale.Close();
       fileOriginale.Delete();
       fsNuovoFile.Close();
+
+      rc4.inizializzaChiaveRC4(Parametri.Psw1);
+      rc4.effettuaXORconKS(nuovoFile.FullName);
+      
       File.Move(nuovoFile.FullName, fileOriginale.FullName);
     }
 
