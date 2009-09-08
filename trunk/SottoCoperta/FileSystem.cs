@@ -70,19 +70,34 @@ namespace SottoCoperta
 
       fsDaDividere.Close();
 
-      // inserisco il nuovo file nella lista di file del file system
-      inserisciListaFile(nomeFile, nuovoNomeFile, crypt);
+      // inserisco il nuovo file nella lista di file del file system e ottengo l'IV se lo voglio criptare
+      byte[] vettoreIV ;
+      vettoreIV = inserisciListaFile(nomeFile, nuovoNomeFile, crypt);
 
       MessageBox.Show("File suddiviso!" /*+ fsDaDividere.Position + " " + fsDaDividere.Length*/, "Success!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
 
       // se si è scelto di cryptare il file
       if (crypt)
       {
-        RC4 rc4 = new RC4(Parametri.Psw1);
+        byte[] temp_key = new byte[ Parametri.len_sts_2 + vettoreIV.Length] ;
+
+        int index = 0 ;
+        for (int i = 0; i < Parametri.len_sts_2; i++)
+        {
+          temp_key[index] = Parametri.sts_2[i];
+          index++;
+        }
+        for( int i = 0 ; i < vettoreIV.Length ; i++) 
+        {
+          temp_key[index] = vettoreIV[i];
+          index++;
+        }
+
+        RC4 rc4 = new RC4(temp_key);
         
         for (int i = 0; i < Parametri.n_split; i++)
         {
-          rc4.inizializzaChiaveRC4(Parametri.Psw1);
+          rc4.inizializzaChiaveRC4(temp_key);
           rc4.effettuaXORconKS(fileSplittato[i].FullName);
         }
       }
@@ -92,37 +107,69 @@ namespace SottoCoperta
         File.Delete(percorso);
     }
 
-    public static void estraiFile(String percorsoFileUnito, bool cancel)
+    //estrae il file dal filesystem opzionalmente è possibile anche cancellare il file dall'archivio nascosto
+    public static void estraiFile(string strFileUnito, string percorso , bool cancel)
     {
 
-      long numByte = 0;
-      string nomeFileUnito = null;
-      string nomeFileDiviso = null;
-      bool crypt = false;
+      long numByte = 0; 
+      string nomeFileDiviso = null; // suffisso dei file splittati
+      bool crypt = false; // se il file è criptato all'interno del file system
+      byte[] vettoreIV = new byte[Parametri.len_IV]; // il vettore IV con cui sono stati cryptati i file nascosti
+      vettoreIV.Initialize();
 
-
-      FileInfo fileUnito = new FileInfo(percorsoFileUnito);
+      // creazione del file estratto
+      FileInfo fileUnito = new FileInfo(percorso + strFileUnito );
       FileStream fsFileUnito = fileUnito.Create();
 
-      nomeFileUnito = fileUnito.Name;
+      // ricerca del suffisso dei file splittatti e se criptato dell'IV
+      nomeFileDiviso = trovaInfoFile( strFileUnito , ref crypt , ref vettoreIV );
 
-      // nomeFileDiviso = trovaFile( nomeFileUnito , ref crypt);
-
-      FileInfo[] fileDaRiunire = new FileInfo[Parametri.n_split];
-
-      FileStream[] fsFileDaRiunire = new FileStream[Parametri.n_split];
-
-      for (int i = 0; i < Parametri.n_split; i++)
+      // se si è scelto di cancellare il file all'interno del filesystem il file viene cancellato dalla lista dei file
+      if (cancel)
       {
-        fileDaRiunire[i] = new FileInfo(Parametri.cartella_filesystem + '\\' + nomeFileDiviso + i + ".007");
-        fsFileDaRiunire[i] = fileDaRiunire[i].Open(FileMode.Open, FileAccess.Read);
+        cancelFileToListFile(strFileUnito);
       }
 
+      // descrittori dei file splittati
+      FileInfo[] fileDaRiunire = new FileInfo[Parametri.n_split];
+      FileStream[] fsFileDaRiunire = new FileStream[Parametri.n_split];
+      
+      // faccio encrypt dei file splittati
+      if(crypt)
+      {
+        byte[] temp_key = new byte[Parametri.len_sts_2 + vettoreIV.Length]; // chiave che do in pasto all'RC4
+
+        // calcolo la chiave RC4
+        int index = 0;
+        for (int i = 0; i < Parametri.len_sts_2; i++)
+        {
+          temp_key[index] = Parametri.sts_2[i];
+          index++;
+        }
+        for (int i = 0; i < vettoreIV.Length; i++)
+        {
+          temp_key[index] = vettoreIV[i];
+          index++;
+        }
+
+        RC4 rc4 = new RC4(temp_key);
+
+        // encrypt dei file splittati
+        for (int i = 0; i < Parametri.n_split; i++)
+        {
+          fileDaRiunire[i] = new FileInfo(Parametri.cartella_filesystem + '\\' + nomeFileDiviso + i + ".007");
+          rc4.inizializzaChiaveRC4(temp_key);
+          rc4.effettuaXORconKS(fileDaRiunire[i].FullName);
+        }
+        
+      }
+
+      // creo il plain-text dei file splittati ( in un unico file)
       for (int i = 0; i < Parametri.n_split; i++)
       {
+        fsFileDaRiunire[i] = fileDaRiunire[i].Open(FileMode.Open, FileAccess.Read);
         numByte = numByte + fsFileDaRiunire[i].Length;
       }
-
 
       for (int i = 0; i < numByte; i++)
       {
@@ -141,6 +188,7 @@ namespace SottoCoperta
 
       fsFileUnito.Close();
 
+      // se ho scelto l'opzione cancella cancello i file splittati dal filesystem
       if (cancel)
       {
         for (int i = 0; i < Parametri.n_split; i++)
@@ -153,31 +201,65 @@ namespace SottoCoperta
     }
 
     // inserisco il file nella lista del file system
-    public static void inserisciListaFile(string nomeFile, string nuovoNomeFile, bool crypt)
+    public static byte[] inserisciListaFile(string nomeFile, string nuovoNomeFile, bool crypt)
     {
+      byte[] vettoreIV;
       if (crypt)
       {
-        byte[] vettoreIV;
+        
         vettoreIV = GeneratoreDiRandom.generaByteRandom(Parametri.len_IV);
-        System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
         string temp_string = "" ;
 
         for (int j = 0; j < vettoreIV.Length; j++)
           temp_string += vettoreIV[j].ToString("x2");
 
         string value = "*" + nuovoNomeFile + "?" + temp_string + ":";
-        Parametri.memoryHash.Add(nomeFile, value);
+        Parametri.memoryHash.Add(nomeFile, value);   
 
       }
       else
       {
         string value = "*" + nuovoNomeFile + ":";
         Parametri.memoryHash.Add(nomeFile, value);
+        vettoreIV = null;
       }
       
       RC4 rc4 = new RC4(Parametri.Psw1);
       memoryToFileHashTable(ref rc4);
+      
+      return vettoreIV;
+    }
 
+    // trove delle informazioni ( crypt , Iv , ChangeName)  su un file nascosto nel filesystem
+    public static string trovaInfoFile( string nomeFileUnito , ref bool crypt , ref byte[] vettoreIV)
+    {
+      string value = (string) Parametri.memoryHash[nomeFileUnito];
+      string nomeChangeFile ;
+      int dim_valore = value.Length;
+      nomeChangeFile = value.Substring(1, Parametri.len_nuovoNomeFile);
+
+      if (dim_valore > 14)
+      {
+        string str_vettoreIV = value.Substring(2+Parametri.len_nuovoNomeFile, Parametri.len_IV );
+        
+        ASCIIEncoding encoding = new ASCIIEncoding();
+        vettoreIV = encoding.GetBytes(str_vettoreIV);
+      }
+      else
+      {
+        crypt = false;
+        vettoreIV = null;
+      }
+
+      return nomeChangeFile;
+    }
+
+    // cancello dalla memoria e dal ListFile un file
+    public static void cancelFileToListFile(string strFileUnito)
+    {
+      Parametri.memoryHash.Remove(strFileUnito);
+      RC4 rc4 = new RC4(Parametri.Psw1);
+      memoryToFileHashTable(ref rc4);
     }
 
     // effettuo la permutazione1 sul file
