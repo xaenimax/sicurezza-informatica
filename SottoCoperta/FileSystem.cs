@@ -52,16 +52,21 @@ namespace SottoCoperta
       }
 
       // riempio i file splittati con il contenuto del file
-      while (fsDaDividere.Position < fileDaDividere.Length)
-      {
-        long temp = fsDaDividere.Position % Parametri.n_split;
-        byte[] temp_byte = new byte[1];
-        temp_byte[0] = (byte)fsDaDividere.ReadByte();
-        BitArray temp_bit = new BitArray(temp_byte); //permutazione 1
-        permutazione1(ref temp_bit); // permutazione 1
-        temp_byte[0] = ConvertToByte(temp_bit); // permutazione 1
-        fsFileSplittato[temp].WriteByte(temp_byte[0]);
-      }
+			long lunghezzaFileDaDividere = fileDaDividere.Length;
+
+			for (int w = 0; w < lunghezzaFileDaDividere; w++ )
+			{
+				long temp = w % Parametri.n_split;
+				byte[] temp_byte = new byte[1];
+				temp_byte[0] = (byte)fsDaDividere.ReadByte();
+
+				//*************************************************************//
+
+				//BitArray temp_bit = new BitArray(temp_byte); //permutazione 1
+				//permutazione1(ref temp_bit); // permutazione 1
+				//temp_byte[0] = ConvertToByte(temp_bit); // permutazione 1
+				fsFileSplittato[temp].WriteByte(temp_byte[0]);
+			}
 
       //chiudo i file splittati creati
       for (int i = 0; i < Parametri.n_split; i++)
@@ -86,7 +91,7 @@ namespace SottoCoperta
           temp_key[index] = Parametri.sts_2[i];
           index++;
         }
-        for( int i = 0 ; i < vettoreIV.Length ; i++) 
+        for( int i = 0 ; i < Parametri.len_IV ; i++) 
         {
           temp_key[index] = vettoreIV[i];
           index++;
@@ -151,7 +156,7 @@ namespace SottoCoperta
           temp_key[index] = Parametri.sts_2[i];
           index++;
         }
-        for (int i = 0; i < vettoreIV.Length; i++)
+        for (int i = 0; i < Parametri.len_IV; i++)
         {
           temp_key[index] = vettoreIV[i];
           index++;
@@ -180,9 +185,12 @@ namespace SottoCoperta
         long temp = i % Parametri.n_split;
         byte[] temp_byte = new byte[1];
         temp_byte[0] = (byte)fsFileDaRiunire[temp].ReadByte();
-        BitArray temp_bit = new BitArray(temp_byte); //inv permutazione 1
-        inv_permutazione1(ref temp_bit); //inv permutazione 1
-        temp_byte[0] = ConvertToByte(temp_bit); // inv permutazione 1
+
+				//******************************************************//
+
+				//BitArray temp_bit = new BitArray(temp_byte); //inv permutazione 1
+				//inv_permutazione1(ref temp_bit); //inv permutazione 1
+				//temp_byte[0] = ConvertToByte(temp_bit); // inv permutazione 1
         fsFileUnito.WriteByte(temp_byte[0]);
       }
 
@@ -233,7 +241,7 @@ namespace SottoCoperta
         value[index] = temp_array_byte[0];
         index++;
 
-        for (int w = 0; w < vettoreIV.Length; w++)
+        for (int w = 0; w < Parametri.len_IV; w++)
         {
           value[index] = vettoreIV[w];
           index++;
@@ -433,7 +441,9 @@ namespace SottoCoperta
       rc4.inizializzaChiaveRC4(Parametri.Psw1);
       memory = rc4.effettuaXORinMemory(Parametri.fileList);
 
-      for (int l = 0; l < memory.Length; l++)
+			long lenMemory = memory.Length;
+
+      for (int l = 0; l < lenMemory; l++)
       {
         int index1 = l;
         while ('*' != (char)memory[l])
