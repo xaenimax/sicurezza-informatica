@@ -75,8 +75,6 @@ namespace SottoCoperta
       byte[] vettoreIV ;
       vettoreIV = inserisciListaFile(nomeFile, nuovoNomeFile, crypt);
 
-      MessageBox.Show("File suddiviso!" /*+ fsDaDividere.Position + " " + fsDaDividere.Length*/, "Success!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
-
       // se si è scelto di cryptare il file
       if (crypt)
       {
@@ -95,7 +93,8 @@ namespace SottoCoperta
         }
 
         RC4 rc4 = new RC4(temp_key);
-        
+
+
         for (int i = 0; i < Parametri.n_split; i++)
         {
           rc4.inizializzaChiaveRC4(temp_key);
@@ -210,23 +209,61 @@ namespace SottoCoperta
     public static byte[] inserisciListaFile(string nomeFile, string nuovoNomeFile, bool crypt)
     {
       byte[] vettoreIV;
+      byte[] byte_nomeFile;
+      byte[] value;
+      
+      ASCIIEncoding encoding = new ASCIIEncoding();
+      byte_nomeFile = encoding.GetBytes(nuovoNomeFile);
+
       if (crypt)
       {
         
         vettoreIV = GeneratoreDiRandom.generaByteRandom(Parametri.len_IV);
-        string temp_string = "" ;
 
-        ASCIIEncoding encoding = new ASCIIEncoding();
-        temp_string = encoding.GetString(vettoreIV, 0, vettoreIV.Length);
+        value = new byte[byte_nomeFile.Length + 3 + vettoreIV.Length];
+        byte[] temp_array_byte = encoding.GetBytes("*");
+        value[0] = temp_array_byte[0];
+        int index = 1;
 
-        string value = "*" + nuovoNomeFile + "?" + temp_string + ":";
+        for (int w = 0; w < byte_nomeFile.Length; w++)
+        {
+          value[index] = byte_nomeFile[w];
+          index++;
+        }
+
+        temp_array_byte = encoding.GetBytes("?") ;
+        value[index] = temp_array_byte[0];
+        index++;
+
+        for (int w = 0; w < vettoreIV.Length; w++)
+        {
+          value[index] = vettoreIV[w];
+          index++;
+        }
+
+        temp_array_byte = encoding.GetBytes(":");
+        value[index] = temp_array_byte[0];
         
-        Parametri.memoryHash.Add(nomeFile, value);   
+        Parametri.memoryHash.Add(nomeFile, value);
+
+        string prova = encoding.GetString(value, 0, value.Length);
 
       }
       else
       {
-        string value = "*" + nuovoNomeFile + ":";
+        value = new byte[byte_nomeFile.Length + 2];
+        byte[] temp_array_byte = encoding.GetBytes("*");
+        value[0] = temp_array_byte[0];
+        int index = 1;
+
+        for (int w = 0; w < byte_nomeFile.Length; w++)
+        {
+          value[index] = byte_nomeFile[w];
+          index++;
+        }
+        temp_array_byte = encoding.GetBytes(":");
+        value[index] = temp_array_byte[0];
+        
         Parametri.memoryHash.Add(nomeFile, value);
         vettoreIV = null;
       }
@@ -240,17 +277,22 @@ namespace SottoCoperta
     // trove delle informazioni ( crypt , Iv , ChangeName)  su un file nascosto nel filesystem
     public static string trovaInfoFile( string nomeFileUnito , ref bool crypt , ref byte[] vettoreIV)
     {
-      string value = (string) Parametri.memoryHash[nomeFileUnito];
-      string nomeChangeFile ;
+      byte[]  value = (byte []) Parametri.memoryHash[nomeFileUnito];
+      string nomeChangeFile = "" ;
       int dim_valore = value.Length;
-      nomeChangeFile = value.Substring(1, Parametri.len_nuovoNomeFile);
+      ASCIIEncoding encoding = new ASCIIEncoding();
+      
+      nomeChangeFile = encoding.GetString(value , 1, Parametri.len_nuovoNomeFile);
 
       if (dim_valore > 14)
       {
-        string str_vettoreIV = value.Substring(2+Parametri.len_nuovoNomeFile, Parametri.len_IV );
+        int index = 2 + Parametri.len_nuovoNomeFile;
+        for (int w = 0 ; w < Parametri.len_IV; w++)
+        {
+          vettoreIV[w] = value[index];
+          index++;
+        }
         
-        ASCIIEncoding encoding = new ASCIIEncoding();
-        vettoreIV = encoding.GetBytes(str_vettoreIV);
         crypt = true;
       }
       else
@@ -407,42 +449,52 @@ namespace SottoCoperta
         chiaveHash = enc.GetString(memory, index1, (l - index1));
 
         index1 = l;
-        string valoreHash;
-        string valore1Hash;
-        string valore2Hash;
 
-        enc = null;
-        enc = new System.Text.ASCIIEncoding();
-        valore1Hash = enc.GetString(memory, index1, Parametri.len_nuovoNomeFile + 1);
+        byte[] valoreHash;
+        byte[] valore1Hash = new byte[Parametri.len_nuovoNomeFile + 1];
+        byte[] valore2Hash;
+
+        for (int w = 0; w < valore1Hash.Length; w++)
+        {
+          valore1Hash[w] = memory[index1];
+          index1++;
+        }
+        
         l = l + Parametri.len_nuovoNomeFile + 1;
         index1 = l;
 
-        if (':' == memory[l])
+        if (':' == (char) memory[l])
         {
-          enc = null;
-          enc = new System.Text.ASCIIEncoding();
-          valore2Hash = enc.GetString(memory, index1, 1);
+          valore2Hash = new byte[1];
+          valore2Hash[0] = memory[l];
         }
         else
         {
-          enc = null;
-          enc = new System.Text.ASCIIEncoding();
-          valore2Hash = enc.GetString(memory, index1, 2 + Parametri.len_IV);
-          l = l + Parametri.len_IV + 1;
+          valore2Hash = new byte[2 + Parametri.len_IV];
+          for (int w = 0; w < valore2Hash.Length; w++)
+          {
+            valore2Hash[w] = memory[index1];
+            index1++;
+          }
+          l = index1;
         }
 
-        valoreHash = valore1Hash + valore2Hash;
-
-        enc = null;
-        enc = new System.Text.ASCIIEncoding();
-        string temp = enc.GetString(memory, 0, memory.Length);
-        
+        valoreHash = new byte[valore1Hash.Length + valore2Hash.Length];
+        for (int w = 0; w < valore1Hash.Length; w++)
+        {
+          valoreHash[w] = valore1Hash[w];
+        }
+        int h = 0;
+        for (int w = valore1Hash.Length; w < valoreHash.Length; w++)
+        {
+          
+          valoreHash[w] = valore2Hash[h];
+          h++;
+        }
 
         Parametri.memoryHash.Add(chiaveHash , valoreHash);
         
       }
-
-
 
     }
 
@@ -465,7 +517,7 @@ namespace SottoCoperta
         ASCIIEncoding encoding = new ASCIIEncoding();
 
         key_byte = encoding.GetBytes( (string)entry.Key ) ;
-        value_byte = encoding.GetBytes( (string) entry.Value );
+        value_byte = (byte[]) entry.Value ;
         fsNuovoFile.Write(key_byte, 0, key_byte.Length);
         fsNuovoFile.Write(value_byte, 0, value_byte.Length);
       }
