@@ -60,7 +60,7 @@ namespace SottoCoperta
 			if (listBox_listaFile.Text != "") {
 				String percorso = @"\My Documents\";
 
-				FileSystem.estraiFile(listBox_listaFile.Text, percorso, checkBox_eliminaFile.Checked , true);
+				FileSystem.estraiFile(listBox_listaFile.Text, percorso, checkBox_eliminaFile.Checked , false);
 
 				Program.cambiaForm(this, new form_ConfermaAzione("recupera"));
 			}
