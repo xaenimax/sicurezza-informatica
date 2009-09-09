@@ -11,9 +11,12 @@ namespace SottoCoperta
 {
 	public partial class form_ConfermaAzione : Form
 	{
-		public form_ConfermaAzione()
+		public form_ConfermaAzione(String tipoDiConferma)
 		{
 			InitializeComponent();
+			label_confermaArchiviazione.Hide();
+			label_confermaRecupero.Hide();
+			visualizzaLabel(tipoDiConferma);
 		}
 
 		private void menuItemIndietro_action(object sender, EventArgs e)
@@ -24,6 +27,17 @@ namespace SottoCoperta
 		private void menuItemEsci_action(object sender, EventArgs e)
 		{
 			Program.close();
+		}
+
+		private void visualizzaLabel(String tipoDiConferma) {
+			if (tipoDiConferma == "backup")
+			{
+				label_confermaArchiviazione.Show();
+			}
+			else
+				label_confermaRecupero.Show();
+		
+		
 		}
 
 		//private void form_ConfermaAzione_KeyDown(object sender, KeyEventArgs e)

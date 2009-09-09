@@ -201,9 +201,7 @@ namespace SottoCoperta
           File.Delete(Parametri.cartella_filesystem + '\\' + nomeFileDiviso + i + ".007");
         }
       }
-
-      MessageBox.Show("File ricostruito!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1);
-    }
+		}
 
     // inserisco il file nella lista del file system
     public static byte[] inserisciListaFile(string nomeFile, string nuovoNomeFile, bool crypt)

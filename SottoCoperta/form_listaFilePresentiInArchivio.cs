@@ -59,7 +59,10 @@ namespace SottoCoperta
 		{
 			if (listBox_listaFile.Text != "") {
 				String percorso = @"\My Documents\";
+
 				FileSystem.estraiFile(listBox_listaFile.Text, percorso, checkBox_eliminaFile.Checked);
+
+				Program.cambiaForm(this, new form_ConfermaAzione("recupera"));
 			}
 			else
 				MessageBox.Show("E' necessario selezionare un file per poterlo estrarre!", "Attenzione", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
