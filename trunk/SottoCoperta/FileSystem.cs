@@ -57,9 +57,9 @@ namespace SottoCoperta
         long temp = fsDaDividere.Position % Parametri.n_split;
         byte[] temp_byte = new byte[1];
         temp_byte[0] = (byte)fsDaDividere.ReadByte();
-        BitArray temp_bit = new BitArray(temp_byte);
-        permutazione1(ref temp_bit);
-        temp_byte[0] = ConvertToByte(temp_bit);
+        BitArray temp_bit = new BitArray(temp_byte); //permutazione 1
+        permutazione1(ref temp_bit); // permutazione 1
+        temp_byte[0] = ConvertToByte(temp_bit); // permutazione 1
         fsFileSplittato[temp].WriteByte(temp_byte[0]);
       }
 
@@ -180,9 +180,9 @@ namespace SottoCoperta
         long temp = i % Parametri.n_split;
         byte[] temp_byte = new byte[1];
         temp_byte[0] = (byte)fsFileDaRiunire[temp].ReadByte();
-        BitArray temp_bit = new BitArray(temp_byte);
-        inv_permutazione1(ref temp_bit);
-        temp_byte[0] = ConvertToByte(temp_bit);
+        BitArray temp_bit = new BitArray(temp_byte); //inv permutazione 1
+        inv_permutazione1(ref temp_bit); //inv permutazione 1
+        temp_byte[0] = ConvertToByte(temp_bit); // inv permutazione 1
         fsFileUnito.WriteByte(temp_byte[0]);
       }
 
@@ -243,8 +243,6 @@ namespace SottoCoperta
         value[index] = temp_array_byte[0];
         
         Parametri.memoryHash.Add(nomeFile, value);
-
-        string prova = encoding.GetString(value, 0, value.Length);
 
       }
       else
@@ -474,7 +472,7 @@ namespace SottoCoperta
             valore2Hash[w] = memory[index1];
             index1++;
           }
-          l = index1;
+          l = index1 -1 ;
         }
 
         valoreHash = new byte[valore1Hash.Length + valore2Hash.Length];
