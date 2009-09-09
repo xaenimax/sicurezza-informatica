@@ -86,8 +86,11 @@ namespace SottoCoperta
         check_nascondi_file.Hide();
 
       }
-			FileSystem.inserisciFile(nomeFileBackupConPercorso, check_nascondi_file.Checked, check_criptaFile.Checked);
-			Program.cambiaForm(this, new form_ConfermaAzione());
+      else
+      {
+        FileSystem.inserisciFile(nomeFileBackupConPercorso, check_nascondi_file.Checked, check_criptaFile.Checked);
+        Program.cambiaForm(this, new form_ConfermaAzione());
+      }
 		}
 
 		//private void menu_item_esci_action(object sender, EventArgs e)
