@@ -13,7 +13,7 @@ namespace SottoCoperta
 
     // permette di inserire il file all'interno del file system in modalità backup o cassaforte 
     // e permette di scegliere se cryptare o lasciare solo nascosto il file
-    public static void inserisciFile(string percorso, bool cancel, bool crypt)
+    public static void inserisciFile(string percorso, bool cancel, bool crypt , bool boolPermutazione1)
     {
 
       FileInfo fileDaDividere = new FileInfo(percorso);
@@ -61,10 +61,12 @@ namespace SottoCoperta
 				temp_byte[0] = (byte)fsDaDividere.ReadByte();
 
 				//*************************************************************//
-
-				//BitArray temp_bit = new BitArray(temp_byte); //permutazione 1
-				//permutazione1(ref temp_bit); // permutazione 1
-				//temp_byte[0] = ConvertToByte(temp_bit); // permutazione 1
+				if (boolPermutazione1)
+				{
+					BitArray temp_bit = new BitArray(temp_byte); //permutazione 1
+					permutazione1(ref temp_bit); // permutazione 1
+					temp_byte[0] = ConvertToByte(temp_bit); // permutazione 1
+				}
 				fsFileSplittato[temp].WriteByte(temp_byte[0]);
 			}
 
@@ -113,7 +115,7 @@ namespace SottoCoperta
     }
 
     //estrae il file dal filesystem opzionalmente è possibile anche cancellare il file dall'archivio nascosto
-    public static void estraiFile(string strFileUnito, string percorso , bool cancel)
+		public static void estraiFile(string strFileUnito, string percorso, bool cancel, bool inv_boolPermutazione1)
     {
 
       long numByte = 0; 
@@ -187,10 +189,12 @@ namespace SottoCoperta
         temp_byte[0] = (byte)fsFileDaRiunire[temp].ReadByte();
 
 				//******************************************************//
-
-				//BitArray temp_bit = new BitArray(temp_byte); //inv permutazione 1
-				//inv_permutazione1(ref temp_bit); //inv permutazione 1
-				//temp_byte[0] = ConvertToByte(temp_bit); // inv permutazione 1
+				if( inv_boolPermutazione1)
+				{
+					BitArray temp_bit = new BitArray(temp_byte); //inv permutazione 1
+					inv_permutazione1(ref temp_bit); //inv permutazione 1
+					temp_byte[0] = ConvertToByte(temp_bit); // inv permutazione 1
+				}
         fsFileUnito.WriteByte(temp_byte[0]);
       }
 
