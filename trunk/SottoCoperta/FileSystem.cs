@@ -104,7 +104,6 @@ namespace SottoCoperta
 
         for (int i = 0; i < Parametri.n_split; i++)
         {
-          rc4.inizializzaChiaveRC4(temp_key);
           rc4.effettuaXORconKS(fileSplittato[i].FullName);
         }
       }
@@ -169,7 +168,6 @@ namespace SottoCoperta
         // encrypt dei file splittati
         for (int i = 0; i < Parametri.n_split; i++)
         {
-          rc4.inizializzaChiaveRC4(temp_key);
           rc4.effettuaXORconKS(fileDaRiunire[i].FullName);
         }
         
